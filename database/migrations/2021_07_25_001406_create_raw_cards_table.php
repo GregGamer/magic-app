@@ -17,7 +17,8 @@ class CreateRawCardsTable extends Migration
             $table->id();
 
             //Core Card Fields
-            $table->uuid('scryfall_id');
+            $table->integer('arena_id');
+            $table->uuid('scryfall_id');  //id
             $table->string('lang');
             $table->uuid('oracle_id');
             $table->string('prints_search_uri');
