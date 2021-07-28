@@ -16,6 +16,19 @@ class CreateRawCardsTable extends Migration
         Schema::create('raw_cards', function (Blueprint $table) {
             $table->id();
 
+            /* Table Fields
+             * Integer: integer
+             * String: string
+             * UUID: uuid
+             * Array: json
+             * Object: json
+             * URI: string
+             * Decimal: decimal
+             * Colors: json
+             * Boolean: boolean
+             * Date: date
+             */
+
             //Core Card Fields
             $table->integer('arena_id');
             $table->uuid('scryfall_id');  //id
