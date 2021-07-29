@@ -19,18 +19,22 @@ class GenerateMenus
     {
         \Menu::make('MyMenu', function($menu){
             $menu->add('Dashboard', [
+                'url' => '/dashboard',
                 'route' => 'dashboard'
             ]);
 
             $menu->add('Collection Archives', [
+                'url' => route('archives.index'),
                 'route' => 'archives.index'
             ]);
 
             $menu->add('My Decks', [
+                'url' => route('decks.index'),
                 'route' => 'decks.index'
             ]);
 
             $menu->add('Search Cards', [
+                'url' => route('cards.index'),
                 'route' => 'cards.index'
             ]);
         });
