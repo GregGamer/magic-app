@@ -17,7 +17,6 @@ class CardController extends Controller
     {
         return view('cards.index',[
             'cards' => Card::with('archive')
-                ->with('edition')
                 ->get()
                 ->groupBy('name', 'archive_id')
         ]);
