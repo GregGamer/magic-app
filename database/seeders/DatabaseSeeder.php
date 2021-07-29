@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
         //Team::factory(1)->create();
         Archive::factory(10)->create();
         Card::factory(500)->create();
-        EditionController::fetchSets();
+        //EditionController::fetchSets();
     }
 }
