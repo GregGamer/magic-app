@@ -11,26 +11,13 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('archives.index') }}" :active="request()->routeIs('archives.index')">
-                        {{ __('Archives') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('decks.index') }}" :active="request()->routeIs('decks.index')">
-                        {{ __('Decks') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('cards.index') }}" :active="request()->routeIs('cards.index')">
-                        {{ __('All Cards') }}
-                    </x-jet-nav-link>
-                </div>
+                @foreach($MyMenu->all() as $menuitem)
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{$menuitem->link->path['url']}}" :active="request()->routeIs('{{$menuitem->route}}')">
+                            {{ __($menuitem->title) }}
+                        </x-jet-nav-link>
+                    </div>
+                @endforeach
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
