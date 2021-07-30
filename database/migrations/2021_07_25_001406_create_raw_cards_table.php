@@ -31,13 +31,8 @@ class CreateRawCardsTable extends Migration
              */
 
             //Core Card Fields
-<<<<<<< HEAD
             //$table->uuid('arena_id')->nullable();
             $table->uuid('scryfall_id');        //this is in the api the 'id' it is the only field, that has a different name
-=======
-            $table->integer('arena_id');
-            $table->uuid('scryfall_id');  //id
->>>>>>> d78ed15171851b06a48c0f3b57f45dffb07cd1c4
             $table->string('lang');
             //$table->integer('mtgo_id')->nullable();
             //$table->integer('mtgo_foil_id')->nullable();
