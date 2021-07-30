@@ -108,14 +108,13 @@ class CreateRawCardsTable extends Migration
             $table->string('set_uri');
             $table->string('set');
             $table->string('set_id');
-            $table->string('scryfall_set_uri');
             $table->boolean('story_spotlight');
             $table->boolean('textless');
             $table->boolean('variation');
             $table->string('watermark')->nullable();
-            $table->date('preview.previewed_at')->nullable();
-            $table->string('preview.source_uri')->nullable();
-            $table->string('preview.source')->nullable();
+            //$table->date('preview.previewed_at')->nullable();
+            //$table->string('preview.source_uri')->nullable();
+            //$table->string('preview.source')->nullable();
 
 
             //Card Face Objects
