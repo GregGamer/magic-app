@@ -1,5 +1,6 @@
 <?php
 
+use Facade\Ignition\Tabs\Tab;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -33,11 +34,12 @@ class CreateRawCardsTable extends Migration
             $table->string('uri');
 
             //Gameplay Fields
+            $table->json('all_parts')->nullable();
             $table->string('card_faces')->nullable();
             $table->string('cmc');
-            $table->string('color_identity');       // color_identity -> Array but is saved as json
-            $table->string('color_indicator')->nullable();       // color_indicators -> Array but is saved as json
-            $table->string('colors')->nullable();   // colors -> Array but is saved as json
+            $table->json('color_identity');       // color_identity -> Array but is saved as json
+            $table->json('color_indicator')->nullable();       // color_indicators -> Array but is saved as json
+            $table->json('colors')->nullable();   // colors -> Array but is saved as json
             $table->integer('edhrec_rank')->nullable();
             $table->boolean('foil');
             $table->string('hand_modifiers')->nullable();               // for Vanguard cards
@@ -52,7 +54,7 @@ class CreateRawCardsTable extends Migration
             $table->text('oracle_text')->nullable();
             $table->boolean('oversized');
             $table->string('power')->nullable();
-            $table->string('produced_mana')->nullable();
+            $table->json('produced_mana')->nullable();
             $table->boolean('reserved');
             $table->string('toughness')->nullable();
             $table->string('type_line');
@@ -65,6 +67,13 @@ class CreateRawCardsTable extends Migration
             $table->string('collector_number');
             $table->boolean('content_warning')->nullable();
             $table->boolean('digital');
+            $table->string('flavor_name')->nullable();
+            $table->string('flavor_text')->nullable();
+            $table->json('frame_effects')->nullable();
+            $table->string('flavor_name')->nullable();
+            $table->string('flavor_name')->nullable();
+            $table->string('flavor_name')->nullable();
+            $table->string('flavor_name')->nullable();
             $table->string('flavor_name')->nullable();
 
 
