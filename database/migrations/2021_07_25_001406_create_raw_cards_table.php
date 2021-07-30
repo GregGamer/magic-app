@@ -70,39 +70,47 @@ class CreateRawCardsTable extends Migration
             $table->string('flavor_name')->nullable();
             $table->string('flavor_text')->nullable();
             $table->json('frame_effects')->nullable();
-            $table->string('flavor_name')->nullable();
-            $table->string('flavor_name')->nullable();
-            $table->string('flavor_name')->nullable();
-            $table->string('flavor_name')->nullable();
-            $table->string('flavor_name')->nullable();
+            $table->string('frame');
+            $table->boolean('full_art')->nullable();
+            $table->json('games');
+            $table->boolean('highres_image');
+            $table->uuid('illustration_id')->nullable();
+            $table->string('image_status');
+            $table->json('image_uris')->nullable();
+            $table->json('prices');
+            $table->string('printed_name')->nullable();
+            $table->string('printed_text')->nullable();
+            $table->string('printed_type_line')->nullable();
+            $table->boolean('promo');
+            $table->json('promo_types')->nullable();
+            $table->json('purchase_uris');
+            $table->string('rarity');
+            $table->json('related_uris');
+            $table->date('released_at');
+            $table->boolean('reprint');
+            $table->string('scryfall_set_uri');
+            $table->string('set_name');
+            $table->string('set_search_uri');
+            $table->string('set_type');
+            $table->string('set_uri');
+            $table->string('set');
+            $table->string('set_id');
+            $table->string('scryfall_set_uri');
+            $table->boolean('story_spotlight');
+            $table->boolean('textless');
+            $table->boolean('variation');
+            $table->string('watermark')->nullable();
+            $table->date('preview.previewed_at')->nullable();
+            $table->string('preview.source_uri')->nullable();
+            $table->string('preview.source')->nullable();
 
 
             //Card Face Objects
+            // is in the other data as json implimented: card_faces
 
             //Related Card Objects
+            // is in the other data as json implimented: all_parts
 
-
-            $table->date('released_at');
-            $table->string('image_status');
-            $table->string('image_uri_small');
-            $table->string('image_uri_normal');
-            $table->string('image_uri_large');
-            $table->string('image_uri_png');
-            $table->string('image_uri_art_crop');
-            $table->string('image_uri_border_crop');
-            $table->boolean('reserved');
-            $table->boolean('reprint');
-            $table->foreignUuid('set_id');
-            $table->string('rarity');
-            $table->text('flavor_text');
-            $table->string('frame');
-            $table->boolean('full_art');
-            $table->boolean('textless');
-            $table->string('prices_eur');
-            $table->string('prices_eur_foil');
-            $table->string('related_uris_gatherer');
-            $table->string('related_uris_edhrec');
-            $table->string('purchase_uris_cardmarket');
 
             $table->timestamps();
         });
