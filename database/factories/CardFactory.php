@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Archive;
 use App\Models\Card;
+use App\Models\RawCard;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Http;
 
@@ -24,7 +25,7 @@ class CardFactory extends Factory
     public function definition()
     {
         return [
-            'card_uuid' => Card::getRandomUUID,
+            'rawcard_uuid' => RawCard::factory()->create(),
             'archive_id' => Archive::all()->random(1)->first(),
             'deck_id' => null,
         ];
