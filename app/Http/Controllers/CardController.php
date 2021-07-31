@@ -156,4 +156,10 @@ class CardController extends Controller
             ])
         ]);
     }
+
+    public function searchDatabase(Request $request){
+        if($request->ajax()){
+            $data = Card::all()->where('archive_id', $request->get('archive_id'));
+        }
+    }
 }
