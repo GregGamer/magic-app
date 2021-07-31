@@ -55,7 +55,7 @@ class CreateRawCardsTable extends Migration
             $table->json('colors')->nullable();   // colors -> Array but is saved as json
             $table->integer('edhrec_rank')->nullable();
             $table->boolean('foil');
-            $table->string('hand_modifiers')->nullable();               // for Vanguard cards
+            $table->string('hand_modifier')->nullable();               // for Vanguard cards
             $table->json('keywords');               // Keywords -> Array but is saved as json
             $table->string('layout');               // Layouts: normal, split, flip, transform, ...
             $table->json('legalities');
@@ -78,10 +78,10 @@ class CreateRawCardsTable extends Migration
             $table->string('border_color');
             $table->uuid('card_back_id');
             $table->string('collector_number');
-            $table->boolean('content_warning')->nullable();
+            //$table->boolean('content_warning')->nullable();
             $table->boolean('digital');
             $table->string('flavor_name')->nullable();
-            $table->string('flavor_text')->nullable();
+            $table->text('flavor_text')->nullable();
             $table->json('frame_effects')->nullable();
             $table->string('frame');
             $table->boolean('full_art')->nullable();

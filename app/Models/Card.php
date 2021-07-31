@@ -21,7 +21,7 @@ class Card extends Model
         return $this->belongsTo(Deck::class);
     }
 
-    public function rawCard(){
+    public function rawcard(){
         return $this->belongsTo(RawCard::class);
     }
 

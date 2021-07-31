@@ -25,7 +25,7 @@ class CardFactory extends Factory
     public function definition()
     {
         return [
-            'rawcard_uuid' => RawCard::factory()->create(),
+            'rawcard_id' => RawCard::all()->random(1)->first(),
             'archive_id' => Archive::all()->random(1)->first(),
             'deck_id' => null,
         ];

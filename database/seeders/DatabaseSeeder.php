@@ -6,6 +6,7 @@ use App\Http\Controllers\EditionController;
 use App\Models\Archive;
 use App\Models\Card;
 use App\Models\Edition;
+use App\Models\RawCard;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,7 +23,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         //Team::factory(1)->create();
-        Archive::factory(10)->create();
+        Archive::factory(2)->create();
+        for($i = 0; $i < 100; $i++){
+            print_r($i+1);
+            RawCard::factory(1)->create();
+        }
         Card::factory(500)->create();
         //EditionController::fetchSets();
     }
