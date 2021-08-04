@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('cards/fetch', [CardController::class, 'fetchCards']);
+Route::get('cards/fetch', [CardController::class, 'storeCardsFromAPI']);
 Route::get('editions/fetch_sets', [EditionController::class, 'fetchSets']);
 Route::get('editions/update_sets', [EditionController::class, 'updateSets']);
 
