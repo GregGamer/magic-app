@@ -33,4 +33,11 @@ class RawCard extends Model
         $CardById = Http::get('https://api.scryfall.com/cards/' . $card_uuid)->object();
         return $CardById; 
     }
+
+    public static function getCardPrintings(string $card_uuid){
+        $rawcard = RawCard::fetchCardByUUID($card_uuid);
+        $printings_url = $rawcard->prints_search_uri;
+        $printings = Http::get($printings_url)->object()->data;
+        return $printings;
+    }
 }

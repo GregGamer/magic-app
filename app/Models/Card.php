@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 
 class Card extends Model
 {
@@ -23,6 +24,12 @@ class Card extends Model
 
     public function rawcard(){
         return $this->belongsTo(RawCard::class);
+    }
+
+    public function getSetIconUri(){
+        $set_uri = RawCard::findOrFail($this->rawcard_id)->set_uri;
+        $set = Http::get($set_uri)->object()->data;
+        return $set;
     }
 
 }
