@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\RawCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class CardController extends Controller
@@ -65,7 +67,9 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-        return view('cards.show');
+        return view('cards.show', [
+            'card' => $card
+        ]);
     }
 
     /**
@@ -111,7 +115,7 @@ class CardController extends Controller
         return redirect()->route('archive.show')->with('success', 'Card got DELETED');
     }
 
-    public function fetchCards(Request $request)
+    public function fetchCards1(Request $request)
     {
         //ddd(Http::get('https://api.scryfall.com/cards/autocomplete',['q' => $request->card_name])->object()->data);
 
@@ -139,27 +143,36 @@ class CardController extends Controller
         return $result;
     }
 
-    public function fetchCards1(Request $request){
-        $autocompleteData = Http::get('https://api.scryfall.com/cards/autocomplete', [
-            'q'=> $request->card_name
+    public static function fetchCardsFromAPI(Request $request){
+        $autocompleteData = Http::get('https://api.scryfall.com/cards/search', [
+            'q'=> "$request->card_name lang:$request->lang",
+            'unique' => 'cards'
         ])->object()->data;
+        //ddd($autocompleteData[0]->id);
 
-        ddd(json_encode([
-            'identifiers' => json_encode([
-                json_encode(['name' => 'Sol Ring']),
-                'name' => 'Edgar Markov'
-            ])]));
+        $result = array();
+        foreach($autocompleteData as $data){
+            if(!RawCard::where('scryfall_id', $data->id)->first()){
+                //ddd(RawCard::where('scryfall_id', $data->id)->first());
+                $result[] = $data;
+            }
+        }
+        return $result;
+   }
 
-        return Http::post('https://api.scryfall.com/cards/collection ', [
-            'identifiers' => json_encode([
-                'name' => 'Sol Ring'
-            ])
-        ]);
-    }
+   public function storeCardsFromAPI(Request $request){
+       $cards = self::fetchCardsFromAPI($request);
+       
+       foreach($cards as $card){
+           RawCardController::storeRawCard($card);
+           dd(RawCard::where('scryfall_id', $card->id)->first());
+       }
+   }
 
     public function searchDatabase(Request $request){
         if($request->ajax()){
             $data = Card::all()->where('archive_id', $request->get('archive_id'));
         }
     }
+
 }
