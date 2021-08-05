@@ -21,4 +21,6 @@
             </div>
         </div>
     </div>
+
+    <script src="/js/search_cards.js"></script>
 </x-app-layout>
