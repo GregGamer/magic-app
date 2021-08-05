@@ -23,7 +23,7 @@ class RawCardController extends Controller
 
         //Gameplay Fields
         $card->all_parts = isset($rawCard->all_parts) ? json_encode($rawCard->all_parts) : json_encode('');
-        $card->card_faces = isset($rawCard->card_faces) ? $rawCard->card_faces : '';
+        $card->card_faces = isset($rawCard->card_faces) ? json_encode($rawCard->card_faces) : json_encode('');
         $card->cmc = $rawCard->cmc;
         $card->color_identity = json_encode($rawCard->color_identity);
         $card->color_indicator = isset($rawCard->color_indicator) ? json_encode($rawCard->color_indicator) : json_encode('');
