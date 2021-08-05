@@ -148,7 +148,6 @@ class CardController extends Controller
             'q'=> "$request->card_name lang:$request->lang",
             'unique' => 'cards'
         ])->object()->data;
-        //ddd($autocompleteData[0]->id);
 
         $result = array();
         foreach($autocompleteData as $data){
@@ -165,8 +164,11 @@ class CardController extends Controller
        
        foreach($cards as $card){
            RawCardController::storeRawCard($card);
-           dd(RawCard::where('scryfall_id', $card->id)->first());
+           //dd(RawCard::where('scryfall_id', $card->id)->first());
        }
+
+       //ddd(json_decode(RawCard::where('name', 'like', '%' . $request->card_name . '%')->first()->color_identity));
+       return RawCard::where('name', 'like', '%' . $request->card_name . '%')->get();
    }
 
     public function searchDatabase(Request $request){
