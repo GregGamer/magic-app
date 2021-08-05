@@ -63,7 +63,7 @@
                                 <a href="{{route('cards.show',['card',$card->first()->id])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="{{route('cards.edit',['card',$card->first()->id])}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             </td>
                         </tr>
                     @endforeach
