@@ -31,5 +31,8 @@ Route::get('editions/update_sets', [EditionController::class, 'updateSets']);
 
 Route::middleware(['auth:sanctum', 'verified'])->resource('archives', ArchiveController::class);
 Route::middleware(['auth:sanctum', 'verified'])->resource('decks', DeckController::class);
-Route::middleware(['auth:sanctum', 'verified'])->resource('cards', CardController::class);
+//Route::middleware(['auth:sanctum', 'verified'])->resource('cards', CardController::class);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('cards', [CardController::class, 'index'])->name('cards.index');
+Route::middleware(['auth:sanctum', 'verified'])->get('cards/{card:oracle_id}', [CardController::class, 'show'])->name('cards.show');
 
