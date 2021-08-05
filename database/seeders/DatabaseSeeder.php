@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         //Team::factory(1)->create();
         Archive::factory(2)->create();
-        for($i = 0; $i < 100; $i++){
+        for($i = 0; $i < 20; $i++){
             print_r($i+1);
             RawCard::factory(1)->create();
         }

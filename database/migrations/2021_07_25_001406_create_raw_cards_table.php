@@ -21,7 +21,7 @@ class CreateRawCardsTable extends Migration
              * Integer: integer
              * String: string
              * UUID: uuid
-             * Array: json
+             * Array: enum
              * Object: json
              * URI: string
              * Decimal: decimal
@@ -48,8 +48,8 @@ class CreateRawCardsTable extends Migration
 
             //Gameplay Fields
             $table->json('all_parts')->nullable();
-            $table->string('card_faces')->nullable();
-            $table->string('cmc');
+            $table->json('card_faces')->nullable();
+            $table->decimal('cmc');
             $table->json('color_identity');       // color_identity -> Array but is saved as json
             $table->json('color_indicator')->nullable();       // color_indicators -> Array but is saved as json
             $table->json('colors')->nullable();   // colors -> Array but is saved as json
@@ -92,7 +92,7 @@ class CreateRawCardsTable extends Migration
             $table->json('image_uris')->nullable();
             $table->json('prices');
             $table->string('printed_name')->nullable();
-            $table->string('printed_text')->nullable();
+            $table->text('printed_text')->nullable();
             $table->string('printed_type_line')->nullable();
             $table->boolean('promo');
             $table->json('promo_types')->nullable();

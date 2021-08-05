@@ -38,7 +38,7 @@ class RawCardFactory extends Factory
 
             //Gameplay Fields
             'all_parts' => isset($randomCard->all_parts) ? json_encode($randomCard->all_parts) : json_encode(''),
-            'card_faces' => isset($randomCard->card_faces) ? $randomCard->card_faces : '',
+            'card_faces' => isset($randomCard->card_faces) ? json_encode($randomCard->card_faces) : json_encode(''),
             'cmc' => $randomCard->cmc,
             'color_identity' => json_encode($randomCard->color_identity),
             'color_indicator' => isset($randomCard->color_indicator) ? json_encode($randomCard->color_indicator) : json_encode(''),
