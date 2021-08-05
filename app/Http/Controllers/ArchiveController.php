@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Archive;
+use App\Models\Card;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -67,6 +68,11 @@ class ArchiveController extends Controller
     {
         return view('archives.show', [
             'archive' => $archive,
+            'cards' => Card::where('archive_id', $archive->id)
+                ->with('archive')
+                ->with('rawcard')
+                ->get()
+                ->groupBy('oracle_id')
 
         ]);
     }
