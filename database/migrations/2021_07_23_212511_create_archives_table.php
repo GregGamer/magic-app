@@ -16,6 +16,7 @@ class CreateArchivesTable extends Migration
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
             $table->foreignId('collection_id');

@@ -6,6 +6,7 @@ use App\Models\Archive;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ArchiveFactory extends Factory
 {
@@ -25,6 +26,7 @@ class ArchiveFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'slug' => Str::slug($this->faker->name()),
             'short_description' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'collection_id' => 1,

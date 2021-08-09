@@ -58,6 +58,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
+                                {{-- TODO make a fix for that ugly code the line below --}}
                                 <div class="text-sm text-gray-900">{{\Illuminate\Support\Facades\DB::table('cards')->where('archive_id', $archive->id)->count()}}</div>
                             </td>
                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -70,10 +71,10 @@
                                 Admin
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="/archives/{{$archive->id}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                <a href="/archives/{{$archive->slug}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="/archives/{{$archive->id}}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <a href="/archives/{{$archive->slug}}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             </td>
                         </tr>
                     @endforeach

@@ -70,7 +70,7 @@
                                 Admin
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="{{route('archives.cards.show', ['archive' => $archive->id,'card'=>$card->first()->id->oracle_id])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                <a href="{{route('archives.cards.show', ['archive' => $archive->slug,'card'=>$card->first()->oracle_id])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
