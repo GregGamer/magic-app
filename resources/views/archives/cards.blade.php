@@ -8,6 +8,10 @@
                     <tr>
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            #
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Name
                         </th>
                         <th scope="col"
@@ -33,6 +37,9 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                     @foreach($cards as $card)
                         <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                {{$loop->iteration}}
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
@@ -63,7 +70,7 @@
                                 Admin
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="{{route('cards.show', ['card'=>$card->first()->oracle_id])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                <a href="{{route('archives.cards.show', ['archive' => $archive->id,'card'=>$card->first()->id->oracle_id])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
