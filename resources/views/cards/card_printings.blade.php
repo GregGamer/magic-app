@@ -30,7 +30,7 @@
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach(App\Models\RawCard::getCardPrintings($card->scryfall_id) as $printing)
+                    @foreach(App\Models\RawCard::getCardPrintings($card->rawcard->scryfall_id) as $printing)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="text-sm text-gray-900">{{$loop->iteration}}</div>
@@ -47,7 +47,7 @@
                                             {{$printing->set_name}}
                                         </div>
                                         <div class="text-sm text-gray-500">
-                                            {{$printings->collector_number}} {{$printing->set}}
+                                            {{$printing->collector_number}} {{$printing->set}}
                                         </div>
                                     </div>
                                 </div>
