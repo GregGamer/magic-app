@@ -45,10 +45,11 @@ class ArchiveCardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Archive $archive, Card $card)
+    public function show( $archive_slug, $card_oracle_id )
     {
-        ddd('test');
-        return [$archive, $card];
+        $archive = Archive::where('slug', $archive_slug)->first();
+        $card = Card::where('oracle_id', $card_oracle_id)->first();
+        
         return view('cards.show', [
             'card' => $card,
             'archive' => $archive
