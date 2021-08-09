@@ -18,9 +18,11 @@ class CardController extends Controller
     public function index()
     {
         return view('cards.index',[
-            'cards' => Card::with('archive')
+            'cards' => Card::where('archive_id', 1)
+                ->with('archive')
+                ->with('rawcard')
                 ->get()
-                ->groupBy('name', 'archive_id')
+                ->groupBy('oracle_id')
         ]);
     }
 
@@ -68,7 +70,8 @@ class CardController extends Controller
     public function show(Card $card)
     {
         return view('cards.show', [
-            'card' => $card
+            'card' => $card,
+            'archive' => null
         ]);
     }
 
