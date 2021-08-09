@@ -2,6 +2,9 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                @unless ($archive == null)
+                    <span class="margin-x-3">Archive: {{$archive->name}}</span>
+                @endunless
                 {{ __('Card: '. $card->rawcard->name) }}
             </h2>
         </div>
