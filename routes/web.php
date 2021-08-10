@@ -94,7 +94,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('decks.')->group(function(
  *        Archive Card Routes
 ********************************************************/
 //Route::middleware(['auth:sanctum', 'verified'])->resource('archives.cards', ArchiveCardController::class);
-Route::middleware(['auth:sanctum', 'verified'])->name('archive.cards.')->group(function(){
+Route::middleware(['auth:sanctum', 'verified'])->name('archives.cards.')->group(function(){
     Route::get('archives/{archive:slug}/cards', [ArchiveController::class, 'show'])
         ->missing(function(){ return redirect()->route('archives.index'); })
         ->name('index');
