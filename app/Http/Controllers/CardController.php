@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archive;
 use App\Models\Card;
 use App\Models\RawCard;
 use Illuminate\Http\Request;
@@ -46,19 +47,23 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => ['required'],
-            'archive_id' => ['required_without:deck_id'],
-            'deck_id' => ['required_without:archive_id']
+        ddd($request->scryfall_uuid);
+        $request->validate([
+            'scryfall_uuid' => ['required'],
+            'archive_id' => ['required'],
         ]);
 
+        $card_data = RawCard::where('scryfall_id', $request->scryfall_id);
+
         $card = new Card();
-        $card->name = $validated->name;
-        $card->archive_id = $validated->archive_id;
-        $card->deck_id = $validated->deck_id;
+        $card->oracle_id = $card_data->oracle_id;
+        $card->rawcard_id = $card_data->id;
+        $card->scryfall_uuid = $card_data->scryfall_uuid;
+        $card->archive_id = $request->archive_id;
+        $card->deck_id = $request->deck_id;
         $card->save();
 
-        return redirect()->route('archives.show')->with('success', 'Card got STORED');
+        return redirect()->route('archives.cards.show')->with('success', 'Card got STORED');
     }
 
     /**
@@ -111,11 +116,12 @@ class CardController extends Controller
      * @param  \App\Models\Card  $card
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Card $card)
+    public function destroy(Archive $archive, Card $card)
     {
+        ddd($request->scryfall_uuid);
         $card->delete();
-
-        return redirect()->route('archive.show')->with('success', 'Card got DELETED');
+// TODO adding variables to route writing the logic for store and delete
+        return redirect()->route('archives.cards.show')->with('success', 'Card got DELETED');
     }
 
     public function fetchCards1(Request $request)
