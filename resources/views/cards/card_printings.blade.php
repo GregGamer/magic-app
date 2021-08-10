@@ -30,7 +30,7 @@
                     @foreach(App\Models\RawCard::getCardPrintings($card->rawcard->scryfall_id) as $printing)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
-                                <div class="text-sm text-gray-900">{{$loop->remaining}}</div>
+                                <div class="text-sm text-gray-900">{{$loop->iteration}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
@@ -50,7 +50,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
-                                <div class="text-sm text-gray-900">{{$printing->set}}</div>
+                                <div class="text-sm text-gray-900">{{App\Models\Card::where([['archive_id', '=', $archive->id],['scryfall_uuid', '=', $printing->id]])->get()->count()}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Substract One</a>

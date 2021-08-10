@@ -26,6 +26,10 @@ class Card extends Model
         return $this->belongsTo(RawCard::class);
     }
 
+    public function scryfall(){
+        return $this->belongsTo(RawCard::class, 'scryfall_uuid', 'scryfall_id');
+    }
+
     public function getSetIconUri(){
         $set_uri = RawCard::findOrFail($this->rawcard_id)->set_uri;
         $set = Http::get($set_uri)->object()->data;

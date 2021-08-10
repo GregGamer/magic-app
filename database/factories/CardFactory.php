@@ -27,6 +27,7 @@ class CardFactory extends Factory
         $rawCard = RawCard::all()->random(1)->first();
         return [
             'rawcard_id' => $rawCard,
+            'scryfall_uuid' => $rawCard->scryfall_id,
             'oracle_id' => $rawCard->oracle_id,
             'archive_id' => Archive::all()->random(1)->first(),
             'deck_id' => null,
