@@ -45,25 +45,17 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Archive $archive, Card $card)
     {
-        ddd($request->scryfall_uuid);
-        $request->validate([
-            'scryfall_uuid' => ['required'],
-            'archive_id' => ['required'],
-        ]);
+        $c = new Card();
+        $c->oracle_id = $card->oracle_id;
+        $c->rawcard_id = $card->id;
+        $c->scryfall_uuid = $card->scryfall_uuid;
+        $c->archive_id = $archive->id;
+        $c->deck_id = null;
+        $c->save();
 
-        $card_data = RawCard::where('scryfall_id', $request->scryfall_id);
-
-        $card = new Card();
-        $card->oracle_id = $card_data->oracle_id;
-        $card->rawcard_id = $card_data->id;
-        $card->scryfall_uuid = $card_data->scryfall_uuid;
-        $card->archive_id = $request->archive_id;
-        $card->deck_id = $request->deck_id;
-        $card->save();
-
-        return redirect()->route('archives.cards.show')->with('success', 'Card got STORED');
+        return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $card->oracle_id])->with('success', 'Card got STORED');
     }
 
     /**
@@ -118,10 +110,8 @@ class CardController extends Controller
      */
     public function destroy(Archive $archive, Card $card)
     {
-        ddd($request->scryfall_uuid);
-        $card->delete();
-// TODO adding variables to route writing the logic for store and delete
-        return redirect()->route('archives.cards.show')->with('success', 'Card got DELETED');
+        Card::where([['archive_id', '=', $archive->id], ['scryfall_id', '=', $card->scryfall_id]])->get()->first()->delete();
+        return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $card->oracle_id])->with('success', 'Card got DELETED');
     }
 
     public function fetchCards1(Request $request)
