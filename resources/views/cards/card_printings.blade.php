@@ -53,18 +53,16 @@
                                 <div class="text-sm text-gray-900">{{App\Models\Card::where([['archive_id', '=', $archive->id],['scryfall_uuid', '=', $printing->id]])->get()->count()}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <form action="{{route('archives.cards.delete')}}" method="post">
+                                <form action="{{route('archives.cards.delete',['archive'=>$archive->slug, 'card'=>$printing->id])}}" method="post">
                                     @csrf
                                     @method('delete')
-                                    {!! Form::hidden('scryfall_uuid', $printing->id, [$options]) !!}
                                     <input type="submit" value="Substract One" \>
                                 </form>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <form action="{{route('archives.cards.store')}}" method="post">
+                                <form action="{{route('archives.cards.store', ['archive' => $archive->slug, 'card' => $printing->id])}}" method="post">
                                     @csrf
                                     @method('put')
-                                    {!! Form::hidden('scryfall_uuid', $printing->id, [$options]) !!}
                                     <input type="submit" value="Add One" \>
                                 </form>
                             </td>
