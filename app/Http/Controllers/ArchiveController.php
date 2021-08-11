@@ -71,8 +71,7 @@ class ArchiveController extends Controller
         return view('archives.show', [
             'archive' => $archive,
             'cards' => Card::where('archive_id', $archive->id)
-                ->with('archive')
-                ->with('rawcard')
+                ->with(['archive', 'rawcard'])
                 ->get()
                 ->groupBy('oracle_id')
 
