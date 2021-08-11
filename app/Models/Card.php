@@ -23,11 +23,7 @@ class Card extends Model
     }
 
     public function rawcard(){
-        return $this->belongsTo(RawCard::class);
-    }
-
-    public function scryfall(){
-        return $this->belongsTo(RawCard::class, 'scryfall_uuid', 'scryfall_id');
+        return $this->belongsTo(RawCard::class, 'scryfall_id', 'scryfall_id');
     }
 
     public function getSetIconUri(){
