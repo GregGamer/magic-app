@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
+use App\Models\Edition;
 
 class RawCard extends Model
 {
@@ -14,8 +13,13 @@ class RawCard extends Model
 
     protected $guarded = array();
 
-    public function edition(){
-        return $this->hasOne(Edition::class);
+    public function cards(){
+        return $this->hasMany(Card::class);
+    }
+
+    public function edition()
+    {
+        return Edition::where('code', $this->set)->first();
     }
 
     public static function rawCardFields(){
