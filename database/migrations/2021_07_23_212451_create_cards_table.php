@@ -18,7 +18,7 @@ class CreateCardsTable extends Migration
             //$table->uuid('oracle_id');
             //$table->foreignId('rawcard_id');
             //$table->foreignUuid('scryfall_uuid');
-            $table->foreignUuid('scryfall_id');
+            $table->foreignId('rawcard_id');
             $table->foreignId('archive_id');
             $table->foreignId('deck_id')->nullable();
             $table->timestamps();

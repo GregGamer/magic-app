@@ -73,7 +73,7 @@ class ArchiveController extends Controller
             'cards' => Card::where('archive_id', $archive->id)
                 ->with(['archive', 'rawcard'])
                 ->get()
-                ->groupBy('oracle_id')
+                ->groupBy('rawcard_id')
 
         ]);
     }

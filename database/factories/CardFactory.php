@@ -29,16 +29,9 @@ class CardFactory extends Factory
             //'rawcard_id' => $rawCard,
             //'scryfall_uuid' => $rawCard->scryfall_id,
             //'oracle_id' => $rawCard->oracle_id,
-            'scryfall_id' => $rawCard->scryfall_id,
+            'rawcard_id' => $rawCard->id,
             'archive_id' => Archive::all()->random(1)->first(),
             'deck_id' => null,
         ];
-    }
-
-    public static function getRandomUUID(){
-
-        $randomCard = Http::get('https://api.scryfall.com/cards/random')->object();
-
-        return $randomCard->id;
     }
 }
