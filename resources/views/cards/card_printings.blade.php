@@ -34,8 +34,8 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
-                                        <img class="h-10 w-10 rounded-full"
-                                             src="{{ Illuminate\Support\Facades\Http::get($printing->set_uri)->object()->icon_svg_uri }}"
+                                        <img class="h-10 w-10"
+                                             src="{{ $printing->edition()->icon_svg_uri }}"
                                              alt="">
                                     </div>
                                     <div class="ml-4">
@@ -49,7 +49,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
-                                <div class="text-sm text-gray-900">{{App\Models\Card::where([['archive_id', '=', $archive->id],['scryfall_uuid', '=', $printing->id]])->get()->count()}}</div>
+                                <div class="text-sm text-gray-900">{{App\Models\Card::where([['archive_id', '=', $archive->id],['rawcard_id', '=', $printing->id]])->get()->count()}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <form action="{{route('archives.cards.delete',['archive'=>$archive->slug, 'card'=>$printing->id])}}" method="post">
