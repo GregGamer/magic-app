@@ -15,15 +15,23 @@ class CreateEditionsTable extends Migration
     {
         Schema::create('editions', function (Blueprint $table) {
             $table->id();
-            $table->string('scryfall_uuid')->unique();
+            $table->string('scryfall_id')->unique();
             $table->string('code')->unique();
             $table->string('name');
-            $table->string('scryfall_uri');
-            $table->date('released_at');
             $table->string('set_type');
-            $table->integer('card_count');
+            $table->date('released_at')->nullable();
+            $table->string('block_code')->nullable();
+            $table->string('block')->nullable();
             $table->string('parent_set_code')->nullable();
+            $table->integer('card_count');
+            $table->boolean('digital');
+            $table->boolean('foil_only');
+            $table->boolean('nonfoil_only');
+            $table->string('scryfall_uri');
+            $table->string('uri');
             $table->string('icon_svg_uri');
+            $table->string('search_uri');
+
             $table->timestamps();
         });
     }

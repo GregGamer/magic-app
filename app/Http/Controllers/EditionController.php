@@ -92,7 +92,7 @@ class EditionController extends Controller
 
         foreach ($editions as $edition) {
             $set = new Edition();
-            $set->scryfall_uuid = $edition->id;
+            $set->scryfall_id = $edition->id;
             $set->code = $edition->code;
             $set->name = $edition->name;
             $set->scryfall_uri = $edition->scryfall_uri;
