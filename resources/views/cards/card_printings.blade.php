@@ -26,8 +26,7 @@
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        {{-- TODO write a better solution for the api fetches --}}
-                    @foreach(App\Models\RawCard::getCardPrintings($card->rawcard->scryfall_id) as $printing)
+                    @foreach($printings as $printing)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="text-sm text-gray-900">{{$loop->iteration}}</div>

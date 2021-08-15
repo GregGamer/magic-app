@@ -5,7 +5,7 @@
                 @unless ($archive == null)
                     <span class="margin-x-3">Archive: {{$archive->name}}</span>
                 @endunless
-                {{ __('Card: '. $card->rawcard->name) }}
+                {{ __('Card: '. $card->name) }}
             </h2>
         </div>
     </x-slot>

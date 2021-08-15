@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Archive;
 use App\Models\Card;
+use App\Models\FetchScryfallApi;
+use App\Models\RawCard;
 use Illuminate\Http\Request;
 
 class ArchiveCardController extends Controller
@@ -48,11 +50,14 @@ class ArchiveCardController extends Controller
     public function show( $archive_slug, $card_oracle_id )
     {
         $archive = Archive::where('slug', $archive_slug)->first();
-        $card = Card::where('oracle_id', $card_oracle_id)->first();
+        $printings = FetchScryfallApi::get_CardPrintings_By_OracleId($card_oracle_id);
+        $single_card = $printings->first();
+        //$card = Card::where('rawcard_id', RawCard::where('oracle_id', $card_oracle_id)->first()->id)->first();
         
         return view('cards.show', [
-            'card' => $card,
-            'archive' => $archive
+            'card' => $single_card,
+            'archive' => $archive,
+            'printings' => $printings
         ]); 
     }
 
