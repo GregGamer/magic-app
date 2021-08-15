@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
             RawCard::factory(1)->create();
         }
         Card::factory(500)->create();
-        //EditionController::fetchSets();
+        EditionController::fetchSets();
     }
 }
