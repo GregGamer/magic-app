@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class RawCardController extends Controller
 {
     //
-    public static function storeRawCard($rawCard)
+    public static function store_RawCard_By_RawCardObject($rawCard)
     {
         $card = new RawCard();
 
