@@ -36,8 +36,28 @@ class EditionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($edition)
     {
+        $set = new Edition();
+        $set->scryfall_id = $edition->id;
+        $set->code = $edition->code;
+        $set->name = $edition->name;
+        $set->set_type = $edition->set_type;
+        $set->released_at = isset($edition->released_at) ? $edition->released_at : '';
+        $set->block_code = isset($edition->block_code) ? $edition->block_code : '';
+        $set->block = isset($edition->block) ? $edition->block : '';
+        $set->parent_set_code = isset($edition->parent_set_code) ? $edition->parent_set_code : '';
+        $set->card_count = $edition->card_count;
+        $set->digital = $edition->digital;
+        $set->foil_only = $edition->foil_only;
+        $set->nonfoil_only = $edition->nonfoil_only;
+        $set->scryfall_uri = $edition->scryfall_uri;
+        $set->uri = $edition->uri;
+        $set->icon_svg_uri = $edition->icon_svg_uri;
+        $set->search_uri = $edition->search_uri;
+
+        $set->save();
+
         return redirect()->route('editions.index')->with('success', 'Editions got STORED');
     }
 
@@ -95,12 +115,20 @@ class EditionController extends Controller
             $set->scryfall_id = $edition->id;
             $set->code = $edition->code;
             $set->name = $edition->name;
-            $set->scryfall_uri = $edition->scryfall_uri;
-            $set->released_at = $edition->released_at;
             $set->set_type = $edition->set_type;
-            $set->card_count = $edition->card_count;
+            $set->released_at = isset($edition->released_at) ? $edition->released_at : '';
+            $set->block_code = isset($edition->block_code) ? $edition->block_code : '';
+            $set->block = isset($edition->block) ? $edition->block : '';
             $set->parent_set_code = isset($edition->parent_set_code) ? $edition->parent_set_code : '';
+            $set->card_count = $edition->card_count;
+            $set->digital = $edition->digital;
+            $set->foil_only = $edition->foil_only;
+            $set->nonfoil_only = $edition->nonfoil_only;
+            $set->scryfall_uri = $edition->scryfall_uri;
+            $set->uri = $edition->uri;
             $set->icon_svg_uri = $edition->icon_svg_uri;
+            $set->search_uri = $edition->search_uri;
+
             $set->save();
         }
 
