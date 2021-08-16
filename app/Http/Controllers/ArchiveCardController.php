@@ -49,8 +49,10 @@ class ArchiveCardController extends Controller
      */
     public function show( $archive_slug, $card_oracle_id )
     {
+        RawCard::update_CardPrintings_By_OracleId($card_oracle_id);
+
         $archive = Archive::where('slug', $archive_slug)->first();
-        $printings = FetchScryfallApi::get_CardPrintings_By_OracleId($card_oracle_id);
+        $printings = RawCard::get_CardPrintings_By_OracleId($card_oracle_id);
         $single_card = $printings->first();
         //$card = Card::where('rawcard_id', RawCard::where('oracle_id', $card_oracle_id)->first()->id)->first();
         

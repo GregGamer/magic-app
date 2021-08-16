@@ -14,51 +14,25 @@ class FetchScryfallApi extends Model
     use HasFactory;
 
     // TODO: Sort out the Code put it away from this class
+            // in other words change the location of the methods, here should only go fetch methods!
+
     // TODO: Rewrite the printings count logic, since it does not check if it exists
 
     public static function fetch_RandomCard(){
         return Http::get("https://api.scryfall.com/cards/random")->object();
     }
 
+    public static function fetch_CardPrinting_By_ScryfallId($scryfall_id){
+        return collect(Http::get('https://api.scryfall.com/cards/' . $scryfall_id)->object());
+    }
+
     public static function fetch_CardPrintings_By_OracleId($oracle_id){
-        return Http::get('https://api.scryfall.com/cards/search', [
+        return collect(Http::get('https://api.scryfall.com/cards/search', [
             'order' => 'released',
             'q' => 'oracleid:'.$oracle_id,
             'unique' => 'prints'
-        ])->object()->data;
+        ])->object()->data);
     }
-
-    public static function store_CardPrintings_By_OracleId($oracle_id){
-        $printings = FetchScryfallApi::fetch_CardPrintings_By_OracleId($oracle_id);
-        if (RawCard::where('oracle_id', $oracle_id)->get()->count() === count($printings)){
-            foreach($printings as $printing){
-                if(! RawCard::where('scryfall_id', $printing->id)->exists()){
-                    RawCardController::store_RawCard_By_RawCardObject($printing);
-                }
-            }
-        }
-    }
-
-    public static function store_CardPrintings_By_CardPrintings($card_printings){
-        foreach($card_printings as $card_printing){
-            if(! RawCard::where('scryfall_id', $card_printing->id)->exists()){
-                RawCardController::store_RawCard_By_RawCardObject($card_printing);
-            }
-        }
-    }
-
-    public static function update_CardPrintings_By_OracleId($oracle_id){
-        $printings = FetchScryfallApi::fetch_CardPrintings_By_OracleId($oracle_id);
-
-        if($printings->count() === RawCard::where('oracle_id', $oracle_id)->get()->count()){
-            FetchScryfallApi::store_CardPrintings_By_CardPrintings($printings);            
-        }
-    }
-
-    public static function get_CardPrintings_By_OracleId($oracle_id){
-        return RawCard::where('oracle_id', $oracle_id)->get();
-    }
-
     //////////////////////////////////////////////////////
     // Edition
     //////////////////////////////////////////////////////
