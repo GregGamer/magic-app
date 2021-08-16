@@ -102,10 +102,12 @@ class CardController extends Controller
      * @param  \App\Models\Card  $card
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Archive $archive, Card $card)
+    public function destroy(Archive $archive, $scryfall_id)
     {
-        Card::where([['archive_id', '=', $archive->id], ['scryfall_id', '=', $card->scryfall_id]])->get()->first()->delete();
-        return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $card->oracle_id])->with('success', 'Card got DELETED');
+        $rawCard = RawCard::where('scryfall_id', $scryfall_id)->first();
+        Card::where([['archive_id', '=', $archive->id], ['rawcard_id', '=', $rawCard->id]])->first()->delete();
+
+        return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $rawCard->oracle_id])->with('success', 'Card got DELETED');
     }
 
     public function fetchCards1(Request $request)
