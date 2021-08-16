@@ -45,17 +45,11 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Archive $archive, Card $card)
+    public function store(Request $request, Archive $archive, $card)
     {
-        $c = new Card();
-        $c->oracle_id = $card->oracle_id;
-        $c->rawcard_id = $card->id;
-        $c->scryfall_uuid = $card->scryfall_uuid;
-        $c->archive_id = $archive->id;
-        $c->deck_id = null;
-        $c->save();
-
-        return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $card->oracle_id])->with('success', 'Card got STORED');
+        $rawCard = Card::store_Card_By_ScryfallId($card, $archive->id);
+        
+        return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $rawCard->rawcard->oracle_id])->with('success', 'Card got STORED');
     }
 
     /**

@@ -59,7 +59,7 @@
                                 </form>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <form action="{{route('archives.cards.store', ['archive' => $archive->slug, 'card' => $printing->id])}}" method="post">
+                                <form action="{{route('archives.cards.store', ['archive' => $archive->slug, 'card' => $printing->scryfall_id])}}" method="post">
                                     @csrf
                                     @method('put')
                                     <input type="submit" value="Add One" \>

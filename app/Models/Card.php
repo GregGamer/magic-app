@@ -10,6 +10,8 @@ class Card extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['rawcard_id', 'archive_id'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -26,10 +28,14 @@ class Card extends Model
         return $this->belongsTo(RawCard::class);
     }
 
-    public function getSetIconUri(){
-        $set_uri = RawCard::findOrFail($this->rawcard_id)->set_uri;
-        $set = Http::get($set_uri)->object()->data;
-        return $set;
-    }
+    public static function store_Card_By_ScryfallId($card_scryfallId, $archive_id){
+        $printing = RawCard::where('scryfall_id', $card_scryfallId)->first();
 
+        $card = Card::create([
+            'rawcard_id' => $printing->id,
+            'archive_id' => $archive_id
+        ]);
+
+        return $card;
+    }
 }

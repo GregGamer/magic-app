@@ -99,7 +99,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('archives.cards.')->group(
         ->missing(function(){ return redirect()->route('archives.index'); })
         ->name('index');
         
-    Route::put('archives/{archive:slug}/cards/{card:scryfall_id}', [ArchiveCardController::class, 'store'])
+    Route::put('archives/{archive:slug}/cards/{card:scryfall_id}', [CardController::class, 'store'])
         ->missing(function(){ return redirect()->route('archives.cards.index'); })
         ->name('store');
         
@@ -107,7 +107,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('archives.cards.')->group(
         ->missing(function(){ return redirect()->route('archives.cards.index'); })
         ->name('show');
         
-    Route::delete('archives/{archive:slug}/cards/{card:scryfall_id}', [ArchiveCardController::class, 'delete'])
+    Route::delete('archives/{archive:slug}/cards/{card:scryfall_id}', [CardController::class, 'delete'])
         ->missing(function(){ return redirect()->route('archives.cards.index'); })
         ->name('delete');
 });
