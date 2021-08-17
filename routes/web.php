@@ -107,7 +107,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('archives.cards.')->group(
         ->missing(function(){ return redirect()->route('archives.cards.index'); })
         ->name('show');
         
-    Route::delete('archives/{archive:slug}/cards/{card:scryfall_id}', [CardController::class, 'delete'])
+    Route::delete('archives/{archive:slug}/cards/{card:scryfall_id}', [CardController::class, 'destroy'])
         ->missing(function(){ return redirect()->route('archives.cards.index'); })
         ->name('delete');
 });
