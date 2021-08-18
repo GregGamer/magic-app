@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchiveCardController;
 use App\Models\FetchScryfallApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('cards/random', fn() => FetchScryfallApi::fetch_RandomCard());
+
+Route::get('cards/search', [ArchiveCardController::class, 'search'])->name('cards.search');
+

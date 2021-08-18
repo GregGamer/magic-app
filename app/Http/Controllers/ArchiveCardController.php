@@ -96,4 +96,24 @@ class ArchiveCardController extends Controller
     {
         //
     }
+    
+    public function search(Request $request){
+        if ( $request->fetch == 'database' ){
+            //GET Parameters: fetch=database&name={name}
+            return RawCard::where('name', $request->name)->orWhere('printed_name', $request->name)->get()->groupBy('oracle_id')->pluck(0); 
+        } elseif ( $request->fetch == 'scryfall' ) {
+            if ( isset($request->name) ) {
+                //GET Parameters: fetch=scryfall&name={name}
+                $responses = FetchScryfallApi::fetch_Cards_By_Name($request->name)->groupBy('oracle_id')->pluck(0);
+               
+                return $responses;
+            }
+            if ( isset($request->q) ) {
+                //GET Parameters: fetch=scryfall&q={query}
+                return FetchScryfallApi::fetch_Card_By_Query($request->q)->groupBy('oracle_id')->pluck(0);
+            }
+        }
+
+        return 'GET parameter were incorrect';
+    }
 }

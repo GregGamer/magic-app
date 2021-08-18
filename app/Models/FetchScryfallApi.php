@@ -26,10 +26,28 @@ class FetchScryfallApi extends Model
         return collect(Http::get('https://api.scryfall.com/cards/' . $scryfall_id)->object());
     }
 
+    public static function fetch_Cards_By_Name($name)
+    {
+        return collect(Http::get('https://api.scryfall.com/cards/search', [
+            'order' => 'released',
+            'q' => 'name:' . $name . ' lang:de',
+            'unique' => 'prints'
+        ])->object()->data);
+    }
+
+    public static function fetch_Card_By_Query($query)
+    {
+        return collect(Http::get('https://api.scryfall.com/cards/search', [
+            'order' => 'released',
+            'q' => $query,
+            'unique' => 'prints'
+        ])->object()->data);
+    }
+
     public static function fetch_CardPrintings_By_OracleId($oracle_id){
         return collect(Http::get('https://api.scryfall.com/cards/search', [
             'order' => 'released',
-            'q' => 'oracleid:'.$oracle_id,
+            'q' => 'oracleid:' . $oracle_id,
             'unique' => 'prints'
         ])->object()->data);
     }
@@ -42,7 +60,7 @@ class FetchScryfallApi extends Model
     }
 
     public static function fetch_Edition_By_Set($set_code){
-        return collect(Http::get('http://api.scryfall.com/sets/'.$set_code)->object());
+        return collect(Http::get('http://api.scryfall.com/sets/'.$set_code)->object()->data);
     }
 
     public static function store_Editions(){
