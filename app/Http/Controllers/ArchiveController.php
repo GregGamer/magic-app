@@ -66,8 +66,11 @@ class ArchiveController extends Controller
      * @param  \App\Models\Archive  $archive
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show(Archive $archive)
+    public function show(Request $request, Archive $archive)
     {
+        if ($request->has('oracle_id')) {
+            return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $request->oracle_id]);
+        }
         return view('archives.show', [
             'archive' => $archive,
             'cards' => Card::where('archive_id', $archive->id)

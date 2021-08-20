@@ -6,6 +6,7 @@ use App\Http\Controllers\EditionController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Self_;
 use App\Http\Controllers\RawCardController;
 
@@ -24,6 +25,12 @@ class FetchScryfallApi extends Model
 
     public static function fetch_CardPrinting_By_ScryfallId($scryfall_id){
         return collect(Http::get('https://api.scryfall.com/cards/' . $scryfall_id)->object());
+    }
+
+    public function fetch_Cards_By_Request(Request $request)
+    {
+        return FetchScryfallApi::fetch_Cards_By_Name($request->term)
+            ->unique('oracle_id');
     }
 
     public static function fetch_Cards_By_Name($name)

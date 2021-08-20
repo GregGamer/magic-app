@@ -25,3 +25,5 @@ Route::get('cards/random', fn() => FetchScryfallApi::fetch_RandomCard());
 
 Route::get('cards/search', [ArchiveCardController::class, 'search'])->name('cards.search');
 
+Route::get('cards/fetch', [FetchScryfallApi::class, 'fetch_Cards_By_Request'])->name('cards.fetch.formatted');
+
