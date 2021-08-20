@@ -4952,6 +4952,32 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__.default;
 alpinejs__WEBPACK_IMPORTED_MODULE_0__.default.start();
+console.log('test');
+$('#magic-search').select2({
+  placeholder: "Search for cards",
+  minimumInputLength: 4,
+  ajax: {
+    url: 'http://127.0.0.1:8000/api/cards/fetch',
+    dataType: 'json',
+    type: 'GET',
+    data: function data(params) {
+      var queryParameters = {
+        term: params.term
+      };
+      return queryParameters;
+    },
+    processResults: function processResults(data) {
+      return {
+        results: $.map(data, function (item) {
+          return {
+            text: item.name,
+            id: item.oracle_id
+          };
+        })
+      };
+    }
+  }
+});
 
 /***/ }),
 
