@@ -71,10 +71,10 @@
                                 Admin
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="/archives/{{$archive->slug}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                <a href="{{route('archives.cards.index', ['archive' => $archive->slug])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="/archives/{{$archive->slug}}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <a href="{{route('archives.edit', ['archive' => $archive->slug])}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             </td>
                         </tr>
                     @endforeach
