@@ -30,7 +30,7 @@ class FetchScryfallApi extends Model
     public function fetch_Cards_By_Request(Request $request)
     {
         return FetchScryfallApi::fetch_Cards_By_Name($request->term)
-            ->unique('oracle_id');
+            ->unique('name');
     }
 
     public static function fetch_Cards_By_Name($name)
