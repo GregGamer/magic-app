@@ -6,6 +6,7 @@ use App\Models\Archive;
 use App\Models\Card;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ArchiveController extends Controller
 {
@@ -43,18 +44,19 @@ class ArchiveController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name' => ['required', 'unique:archives', 'max:255'],
             'collection_id' => ['required', 'exists:teams,id']
         ]);
-
+        
         $archive = new Archive();
-        $archive->name = $validated->name;
-        $archive->collection_id = $validated->collection_id;
-        $archive->short_description = $validated->short_description;
-        $archive->description = $validated->description;
-        $archive->isFolder = $validated->isFolder == true;
-        $archive->maxCardsInSlot = $validated->maxCardsInSlot;
+        $archive->name = $request->name;
+        $archive->slug = Str::slug($request->name);
+        $archive->short_description = $request->short_description;
+        $archive->description = $request->description;
+        $archive->collection_id = $request->collection_id;
+        $archive->isFolder = $request->isFolder == true;
+        $archive->maxCardsInSlot = $request->maxCardsInSlot;
         $archive->save();
 
         return redirect(route('archives.index'))->with('success', 'Archive wurde erstellt');
