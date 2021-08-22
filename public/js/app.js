@@ -4957,7 +4957,7 @@ $('#magic-search').select2({
   placeholder: "Search for cards",
   minimumInputLength: 4,
   ajax: {
-    url: 'http://127.0.0.1:8000/api/cards/fetch',
+    url: '/api/cards/fetch',
     dataType: 'json',
     type: 'GET',
     data: function data(params) {
