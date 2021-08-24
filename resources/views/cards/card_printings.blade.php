@@ -6,22 +6,16 @@
                     <thead class="bg-gray-50">
                     <tr>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                             #
                         </th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Set Name
                         </th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Anz in Archive
-                        </th>
-                        <th scope="col" class="relative px-6 py-3">
-                            <span class="sr-only">Add</span>
-                        </th>
-                        <th scope="col" class="relative px-6 py-3">
-                            <span class="sr-only">Remove</span>
+                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Add / Removee
                         </th>
                     </tr>
                     </thead>
@@ -48,23 +42,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center">
-                                <div class="text-sm text-gray-900">{{$printing->cards->count()}}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <form action="{{route('archives.cards.delete',['archive'=>$archive->slug, 'card'=>$printing->scryfall_id])}}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" value="Substract One" \>
-                                </form>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <form action="{{route('archives.cards.store', ['archive' => $archive->slug, 'card' => $printing->scryfall_id])}}" method="post">
-                                    @csrf
-                                    @method('put')
-                                    <input type="submit" value="Add One" \>
-                                </form>
-                            </td>
+                            @livewire('card-printing-counter', [ 'archive' => $archive, 'printing' => $printing ] )
                         </tr>
                     @endforeach
                     </tbody>
