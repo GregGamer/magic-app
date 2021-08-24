@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Edition;
+use App\Models\Card;
 use App\Http\Controllers\RawCardController;
 
 class RawCard extends Model
@@ -15,7 +16,7 @@ class RawCard extends Model
     protected $guarded = array();
 
     public function cards(){
-        return $this->hasMany(Card::class);
+        return $this->hasMany(Card::class, 'rawcard_id', 'id');
     }
 
     public function edition()

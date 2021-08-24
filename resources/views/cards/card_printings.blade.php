@@ -49,7 +49,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
-                                <div class="text-sm text-gray-900">{{App\Models\Card::where([['archive_id', '=', $archive->id],['rawcard_id', '=', $printing->id]])->get()->count()}}</div>
+                                <div class="text-sm text-gray-900">{{$printing->cards->count()}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <form action="{{route('archives.cards.delete',['archive'=>$archive->slug, 'card'=>$printing->scryfall_id])}}" method="post">
