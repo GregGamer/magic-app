@@ -105,7 +105,7 @@ class CardController extends Controller
     public function destroy(Archive $archive, $scryfall_id)
     {
         $rawCard = RawCard::where('scryfall_id', $scryfall_id)->first();
-        Card::where([['archive_id', '=', $archive->id], ['rawcard_id', '=', $rawCard->id]])->first()->delete();
+        Card::delete_Card_By_CardPrinting_And_Archive($rawCard, $archive);
 
         return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $rawCard->oracle_id])->with('success', 'Card got DELETED');
     }

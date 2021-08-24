@@ -28,14 +28,16 @@ class Card extends Model
         return $this->belongsTo(RawCard::class);
     }
 
-    public static function store_Card_By_ScryfallId($card_scryfallId, $archive_id){
-        $printing = RawCard::where('scryfall_id', $card_scryfallId)->first();
-
+    public static function store_Card_By_CardPrinting_And_Archive($printing, $archive){
         $card = Card::create([
             'rawcard_id' => $printing->id,
-            'archive_id' => $archive_id
+            'archive_id' => $archive->id
         ]);
 
         return $card;
+    }
+
+    public static function delete_Card_By_CardPrinting_And_Archive($printing, $archive){
+        Card::where([['archive_id', '=', $archive->id], ['rawcard_id', '=', $printing->id]])->first()->delete();
     }
 }
