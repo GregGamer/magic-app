@@ -12,6 +12,11 @@ class CardPrintingCounter extends Component
     //TODO: FIX why is cards->count() not up to date with what is in the database after calling addOne/subOne
     public $helper_counter;
 
+    public function mount()
+    {
+        $this->helper_counter = $this->printing->cards->count();
+    }
+
     public function addOne()
     {
         Card::store_Card_By_CardPrinting_And_Archive($this->printing, $this->archive);

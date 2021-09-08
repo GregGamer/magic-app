@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                             </td>
-                            @livewire('card-printing-counter', [ 'archive' => $archive, 'printing' => $printing , 'helper_counter' => $printing->cards->count()] )
+                            @livewire('card-printing-counter', [ 'archive' => $archive, 'printing' => $printing ] )
                         </tr>
                     @endforeach
                     </tbody>
