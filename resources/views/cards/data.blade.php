@@ -2,15 +2,14 @@
     <div class="overflow-x-auto">
         <div class="align-middle inline-block min-w-full">
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <div class="flex flex-row py-3 px-3">
-                    <div class="py-3 px-3">
-                        <div class="flex justify-between items-center">
+                <div class="flex flex-row p-3">
+                    <div class="p-3">
+                        <div class="flex justify-between items-center bg-gray-200 p-3">
                             <div class="text-gray-500 text-4xl">{{ $card->name }}</div>
                             <div class="flex flex-row px-3 text-xl w-max h-6">
-                                {{ $card->mana_cost }}
-                                <img class="px-1" src="https://c2.scryfall.com/file/scryfall-symbols/card-symbols/2.svg" alt="two generic mana">
-                                <img class="px-1" src="https://c2.scryfall.com/file/scryfall-symbols/card-symbols/2.svg" alt="two generic mana">
-                                <img class="px-1" src="https://c2.scryfall.com/file/scryfall-symbols/card-symbols/2.svg" alt="two generic mana">
+                                @foreach ($card->mana_symbols() as $symbol)
+                                    <img class="px-1 drop-shadow-lg" src="{{$symbol->svg_uri}}" alt="{{$symbol->english}}">
+                                @endforeach
                             </div>
                         </div>
                         <div>
@@ -28,7 +27,7 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="py-3 px-3">
+                    <div class="p-3">
                         <div>
                             <img src="{{json_decode($card->image_uris)->normal}}" alt="Card Printing"/>
                         </div>
