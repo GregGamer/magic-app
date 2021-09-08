@@ -23,6 +23,10 @@ class FetchScryfallApi extends Model
         return Http::get("https://api.scryfall.com/cards/random")->object();
     }
 
+    public static function fetch_Rulings_By_Uri($rulings_uri){
+        return Http::get($rulings_uri)->object();
+    }
+
     public static function fetch_CardPrinting_By_ScryfallId($scryfall_id){
         return collect(Http::get('https://api.scryfall.com/cards/' . $scryfall_id)->object());
     }

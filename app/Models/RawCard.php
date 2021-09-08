@@ -23,6 +23,10 @@ class RawCard extends Model
     {
         return Edition::where('code', $this->set)->first();
     }
+    
+    public function rulings() {
+        return collect(FetchScryfallApi::fetch_Rulings_By_Uri($this->rulings_uri)->data);
+    }
 
     public static function store_CardPrintings_By_OracleId($oracle_id){
         $printings = FetchScryfallApi::fetch_CardPrintings_By_OracleId($oracle_id);
