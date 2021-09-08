@@ -32,6 +32,24 @@ class RawCard extends Model
         return Symbology::get_Symbology_By_SymbolString($this->mana_cost);
     }
 
+    public function types() {
+        // a function which seperates the type into supertype, type and subtype
+        //return collect('supertype' => 'Legendary', 'type' => 'Creature');
+    }
+
+    public function render_text() {
+        $text = $this->printed_text ? $this->printed_text : $this->oracle_text;
+        $name = $this->printed_name ? $this->printed_name : $this->name;
+
+        $text = '<p class="py-1">' . $text . '</p>';
+        $text = preg_replace(['/\\n/', '/'.$name.'/'], ['</p><p class="py-1">', '<span class="font-bold">'.$name.'</span>'], $text);
+        foreach(Symbology::all() as $symbol){
+            $text = str_replace( $symbol->symbol, '<img class="h-5 inline-block" src="'. $symbol->svg_uri .'" alt="'. $symbol->english .'">', $text);
+        }
+
+        return $text;
+    }
+
    public static function store_CardPrintings_By_OracleId($oracle_id){
         $printings = FetchScryfallApi::fetch_CardPrintings_By_OracleId($oracle_id);
         if (RawCard::where('oracle_id', $oracle_id)->get()->count() === count($printings)){
