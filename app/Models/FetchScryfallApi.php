@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\EditionController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Self_;
-use App\Http\Controllers\RawCardController;
 
 class FetchScryfallApi extends Model
 {
@@ -72,37 +69,6 @@ class FetchScryfallApi extends Model
 
     public static function fetch_Edition_By_Set($set_code){
         return collect(Http::get('http://api.scryfall.com/sets/'.$set_code)->object()->data);
-    }
-
-    public static function store_Editions(){
-        $editions = FetchScryfallApi::fetch_Editions();
-
-        foreach($editions as $edition){
-            FetchScryfallApi::store_Edition_by_EditionObject($edition);
-        }
-    }
-
-    public static function store_Edition_by_EditionObject($edition){
-        if (! Edition::where('code', $edition->code)->exists()){
-            // TODO: unbedingt eine andere Methode fürs speichern verwenden
-            (new EditionController)->store($edition);
-       }
-    }
-
-    public static function check_ApiEditions_with_DbEditions(){
-        return Edition::all()->count() == FetchScryfallApi::fetch_Editions()->count();
-    }
-
-    public static function update_Editions(){
-        $editions = FetchScryfallApi::fetch_Editions();
-        if(! FetchScryfallApi::check_ApiEditions_with_DbEditions()){
-            FetchScryfallApi::store_Editions();
-        }
-        return true;
-    }
-
-    public static function get_EditionSvg_By_Set($set_code){
-        return Edition::where('set', $set_code)->first()->icon_svg_uri;
     }
 
 
