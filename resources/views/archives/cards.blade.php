@@ -40,9 +40,12 @@
                                         <div class="text-sm font-medium text-gray-900">
                                             {{$card->first()->rawcard->name}}
                                         </div>
-                                        <div class="text-sm text-gray-500">
-                                            {{$card->first()->rawcard->mana_cost}}
+                                        <div class="flex flex-row text-xl w-max h-4">
+                                            @foreach ($card->first()->rawcard->mana_symbols() as $symbol)
+                                                <img class="px-0.5 drop-shadow-lg" src="{{$symbol->svg_uri}}" alt="{{$symbol->english}}">
+                                            @endforeach
                                         </div>
+
                                     </div>
                                 </div>
                             </td>
