@@ -10,12 +10,16 @@
                             #
                         </th>
                         <th scope="col"
-                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-xs font-medium text-gray-500 text-left uppercase tracking-wider">
                             Set Name
                         </th>
                         <th scope="col"
-                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-xs font-medium text-gray-500 text-left uppercase tracking-wider">
                             Add / Removee
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Price on Scryfall
                         </th>
                     </tr>
                     </thead>
@@ -43,6 +47,13 @@
                                 </div>
                             </td>
                             @livewire('card-printing-counter', [ 'archive' => $archive, 'printing' => $printing ] )
+                            <td>
+                                @if ($price = json_decode($printing->prices)->eur)
+                                    <div class="text-sm text-center font-medium text-gray-900">
+                                        {{ $price }} €
+                                    </div>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
