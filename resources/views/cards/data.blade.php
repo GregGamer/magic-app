@@ -12,27 +12,34 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="flex justify-between items-center border-2 p-2 my-5 rounded-lg w-full">
+                        <div class="flex justify-between items-center border-2 p-2 mt-5 rounded-lg w-full">
                             <p>{{ $card->type_line }}</p>
+                            <p>{{ $card->rarity }} <img class="inline-block h-7" src="{{ $card->edition()->icon_svg_uri}}" alt=""></p>
                         </div>
                         <div class="p-3">
                             <div class="py-2">
                                 <p>{!! $card->render_text() !!}</p>
                             </div>
-                            <div class="py-2">
-                                <p class="italic">{{ $card->flavor_text }}</p>
-                            </div>
-                            {{-- das '&& false' ist um den Block 'auszuschalten' --}}
-                            @if ($card->rulings()->count() != 0 && false)
-                                <div class="py-2">
-                                    <div class="">Rulings</div>
-                                    <ol class="list-decimal list-outside">
-                                        @foreach ($card->rulings() as $rule)
-                                            <li>{{ $rule->comment }}</li>
-                                        @endforeach
-                                    </ol>
+                            @if ($card->flavor_text)
+                                <div class="py-2 border-t-2">
+                                    <p class="italic">{{ $card->flavor_text }}</p>
                                 </div>
                             @endif
+                        </div>
+                        <div class="flex flex-row justify-between items-center border-t-2 p-4">
+                            <div class="flex flex-col">
+                                <div>{{ $card->collector_number }}/{{ $card->edition()->card_count }}</div>
+                                <div>{{ Str::upper($card->edition()->parent_set_code ? $card->edition()->parent_set_code : $card->edition()->code) }} + {{ Str::upper($card->lang) }} - {{ $card->artist }}</div>
+                            </div>
+                            @if (Str::contains($card->type_line, 'Creature'))
+                                <div class="border-2 rounded-lg px-4 py-2">
+                                    {{ $card->power }} / {{ $card->toughness }}
+                                </div>
+                            @elseif (Str::contains($card->type_line, 'Planeswalker'))
+                                <div class="border-2 rounded-lg px-4 py-2">
+                                    {{ $card->loyalty }} 4
+                                </div>
+                             @endif
                        </div>
                     </div>
                     <div class="p-3 w-1/3">
