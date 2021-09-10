@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Catalog;
 use App\Models\Edition;
+use App\Models\Setting;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,11 @@ class UpdateDatabase
      */
     public function handle(Request $request, Closure $next)
     {
-        Catalog::updateTable();
-        Edition::updateTable();
-
-
+        if(Setting::week_old()){
+            Catalog::updateTable();
+            Edition::updateTable();
+            //Symbology::updateTable();
+        }
 
         return $next($request);
     }
