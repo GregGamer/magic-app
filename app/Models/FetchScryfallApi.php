@@ -59,6 +59,7 @@ class FetchScryfallApi extends Model
             'unique' => 'prints'
         ])->object()->data);
     }
+
     //////////////////////////////////////////////////////
     // Edition
     //////////////////////////////////////////////////////
@@ -71,5 +72,12 @@ class FetchScryfallApi extends Model
         return collect(Http::get('http://api.scryfall.com/sets/'.$set_code)->object()->data);
     }
 
+    //////////////////////////////////////////////////////
+    // Symbology
+    //////////////////////////////////////////////////////
+
+    public static function fetch_Symbology(){
+        return collect(Http::get('https://api.scryfall.com/symbology')->object()->data);
+    }
 
 }
