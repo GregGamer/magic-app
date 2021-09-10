@@ -44,4 +44,9 @@ class Edition extends Model
 
 
 
+    public static function updateTable(){
+        self::update_Editions();
+    }
+
+
 }
