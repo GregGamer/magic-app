@@ -43,11 +43,13 @@ class Catalog extends Model
             'ability-words'
         ];
 
+
         foreach ($catalogs as $catalog) {
             $catalog_values = self::check_Catalog_By_Name($catalog);
 
             if ($catalog_values !== true){
                 self::delete_Catalog_By_Name($catalog);
+                error_log('Catalog Table gets an update');
 
                 foreach ($catalog_values as $catalog_value) {
                     self::create([
