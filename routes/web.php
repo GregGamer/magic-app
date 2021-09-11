@@ -97,6 +97,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('decks.')->group(function(
 Route::middleware(['auth:sanctum', 'verified'])->name('archives.cards.')->group(function(){
     Route::get('archives/{archive:slug}/cards', [ArchiveController::class, 'show'])
         ->missing(function(){ return redirect()->route('archives.index'); })
+        ->middleware(['updateDB'])
         ->name('index');
 
     Route::put('archives/{archive:slug}/cards/{card:scryfall_id}', [CardController::class, 'store'])

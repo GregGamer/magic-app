@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\Models\Catalog;
 use App\Models\Edition;
 use App\Models\Setting;
+use App\Models\Symbology;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -22,7 +24,8 @@ class UpdateDatabase
         if(Setting::week_old()){
             Catalog::updateTable();
             Edition::updateTable();
-            //Symbology::updateTable();
+            Symbology::updateTable();
+
         }
 
         return $next($request);

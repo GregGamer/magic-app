@@ -16,15 +16,10 @@ class Setting extends Model
     ];
 
     public static function week_old(){
-        $now = Carbon::now();
-        $key = 'last_updated_date';
+        $diffInWeeks = Carbon::now()->diffInWeeks(self::firstOrCreate(['key' => 'last_updated_date'],['value' => Carbon::now()->subWeek()])->value);
 
-        $last_updated_date = self::firstOrCreate(['key' => $key], ['value' => $now])->value;
-
-        if($now->diffInWeeks($last_updated_date)){
-            self::where('key', $key)->update(['value' => $now]);
-            return true;
-        }
-        return false;
+        if ($diffInWeeks >= 1)
+            self::where('key', 'last_updated_date')->update(['value' => Carbon::now()]);
+        return $diffInWeeks;
     }
 }
