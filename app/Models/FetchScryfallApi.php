@@ -80,4 +80,11 @@ class FetchScryfallApi extends Model
         return collect(Http::get('https://api.scryfall.com/symbology')->object()->data);
     }
 
+    //////////////////////////////////////////////////////
+    // Catalogs
+    //////////////////////////////////////////////////////
+
+    public static function fetch_Catalog_By_Name($catalog){
+        return collect(Http::get('https://api.scryfall.com/catalog/' . $catalog)->object()->data);
+    }
 }
