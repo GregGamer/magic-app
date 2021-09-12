@@ -22,8 +22,4 @@ class Setting extends Model
             self::where('key', 'last_updated_date')->update(['value' => Carbon::now()]);
         return $diffInWeeks;
     }
-
-    public static function key($key){
-        return self::where('key', $key)->first()->value;
-    }
 }
