@@ -6,15 +6,22 @@
                     <div class="p-3 w-2/3">
                         <div class="flex justify-between items-center bg-gray-200 p-3 rounded-lg">
                             <div class="text-gray-500 text-4xl">{{ $card->printed_name ? $card->printed_name : $card->name }}</div>
-                            <div class="flex flex-row px-3 text-xl w-max h-6">
+                            <div class="flex flex-row justify-between items-center">
                                 @foreach ($card->mana_symbols() as $symbol)
-                                    <img class="px-1 drop-shadow-lg" src="{{$symbol->svg_uri}}" alt="{{$symbol->english}}">
+                                    <img class="mx-1 drop-shadow-lg w-7" src="{{$symbol->svg_uri}}" alt="{{$symbol->english}}">
                                 @endforeach
                             </div>
                         </div>
                         <div class="flex justify-between items-center border-2 p-2 mt-5 rounded-lg w-full">
                             <p>{{ $card->type_line }}</p>
                             <p>{{ $card->rarity }} <img class="inline-block h-7" src="{{ $card->edition()->icon_svg_uri}}" alt=""></p>
+                        </div>
+                        <div class="flex flex-row items-center py-2">
+                             @foreach (json_decode($card->keywords) as $keyword)
+                                <div class="mx-2 text-sm inline-flex items-center font-bold leading-sm px-3 py-1 bg-red-200 text-red-700 rounded-full">
+                                    {{ $keyword }}
+                                </div>
+                             @endforeach
                         </div>
                         <div class="p-3">
                             <div class="py-2">
@@ -29,7 +36,13 @@
                         <div class="flex flex-row justify-between items-center border-t-2 p-4">
                             <div class="flex flex-col">
                                 <div>{{ $card->collector_number }}/{{ $card->edition()->card_count }}</div>
-                                <div>{{ Str::upper($card->edition()->parent_set_code ? $card->edition()->parent_set_code : $card->edition()->code) }} + {{ Str::upper($card->lang) }} - {{ $card->artist }}</div>
+                                <div>
+                                    <span class="uppercase">{{ $card->edition()->parent_set_code ? $card->edition()->parent_set_code : $card->edition()->code }}</span>
+                                     +
+                                    <span class="uppercase">{{ $card->lang }}</span>
+                                     -
+                                    {{ $card->artist }}
+                                </div>
                             </div>
                             @if (Str::contains($card->type_line, 'Creature'))
                                 <div class="border-2 rounded-lg px-4 py-2">
