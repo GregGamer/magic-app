@@ -64,8 +64,4 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('archives/{archive:slug}/cards/{scryfall_id}', [ArchiveCardController::class, 'show'])
         ->middleware(['updateDB'])
         ->name('archives.cards.show');
-
-    Route::get('archives/{archive:slug}/cards', [ArchiveController::class, 'show'])
-        ->middleware(['updateDB'])
-        ->name('archives.cards.index');
 });

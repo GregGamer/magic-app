@@ -57,7 +57,7 @@
                     </div>
                     <div class="p-3 w-1/3">
                         <div>
-                            <img class="rounded-lg" src="{{json_decode($card->image_uris)->normal}}" alt="Card Printing"/>
+                            <img class="rounded-2xl" src="{{json_decode($card->image_uris)->normal}}" alt="Card Printing"/>
                         </div>
                         <div class="flex felx-row justify-between items-center">
                             <a href="{{ $card->uri }}" target="_blank">Raw Data</a>

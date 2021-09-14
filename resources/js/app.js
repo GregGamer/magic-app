@@ -17,7 +17,7 @@ $('#magic-search').select2({
 
         var queryParameters = {
             term: params.term
-        }
+        };
         return queryParameters;
       },
       processResults: function (data) {
@@ -26,7 +26,7 @@ $('#magic-search').select2({
                   return {
                       text: item.name,
                       id: item.id
-                  }
+                  };
               })
           };
       },
