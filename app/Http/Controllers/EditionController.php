@@ -69,7 +69,7 @@ class EditionController extends Controller
      */
     public function show(Edition $edition)
     {
-        return view('editions.show');
+        return view('editions.show', ['edition' => $edition]);
     }
 
     /**
@@ -80,7 +80,7 @@ class EditionController extends Controller
      */
     public function edit(Edition $edition)
     {
-        return view('editions.edit');
+        return view('editions.edit', ['edition' => $edition]);
     }
 
     /**
@@ -103,6 +103,7 @@ class EditionController extends Controller
      */
     public function destroy(Edition $edition)
     {
+        $edition->delete();
         return redirect()->route('editions.index')->with('success', 'Edition got DELETED');
     }
 
