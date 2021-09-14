@@ -6,7 +6,6 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-console.log('test');
 $('#magic-search').select2({
   placeholder: "Search for cards",
   minimumInputLength: 4,
