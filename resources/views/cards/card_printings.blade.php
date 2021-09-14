@@ -11,6 +11,10 @@
                         </th>
                         <th scope="col"
                             class="px-6 py-3 text-xs font-medium text-gray-500 text-left uppercase tracking-wider">
+                            Card Name
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium text-gray-500 text-left uppercase tracking-wider">
                             Set Name
                         </th>
                         <th scope="col"
@@ -28,6 +32,9 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="text-sm text-gray-900">{{$loop->iteration}}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="{{ route('archives.cards.show', ['archive' => $archive, 'scryfall_id' => $printing->scryfall_id])}}" class="text-sm text-gray-900">{{ $printing->printed_name ? $printing->printed_name : $printing->name }}</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">

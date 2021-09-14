@@ -26,7 +26,7 @@ $('#magic-search').select2({
               results: $.map(data, function (item) {
                   return {
                       text: item.name,
-                      id: item.oracle_id
+                      id: item.id
                   }
               })
           };

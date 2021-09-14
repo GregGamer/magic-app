@@ -16,17 +16,13 @@ class ArchiveCardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show( $archive_slug, $card_oracle_id )
+    public function show( Archive $archive, $scryfall_id )
     {
-        RawCard::update_CardPrintings_By_OracleId($card_oracle_id);
-
-        $archive = Archive::where('slug', $archive_slug)->first();
-        $printings = RawCard::get_CardPrintings_By_OracleId($card_oracle_id)->sortByDesc('released_at');
-        $single_card = $printings->first();
-        //$card = Card::where('rawcard_id', RawCard::where('oracle_id', $card_oracle_id)->first()->id)->first();
+        $printing = RawCard::findScryfallId($scryfall_id);
+        $printings = $printing->printings();
 
         return view('cards.show', [
-            'card' => $single_card,
+            'card' => $printing,
             'archive' => $archive,
             'printings' => $printings
         ]);
@@ -36,7 +32,8 @@ class ArchiveCardController extends Controller
         if ( $request->fetch == 'database' ){
             //GET Parameters: fetch=database&name={name}
             return RawCard::where('name', $request->name)->orWhere('printed_name', $request->name)->get()->groupBy('oracle_id')->pluck(0);
-        } elseif ( $request->fetch == 'scryfall' ) {
+        }
+        elseif ( $request->fetch == 'scryfall' ) {
             if ( isset($request->name) ) {
                 //GET Parameters: fetch=scryfall&name={name}
                 $responses = FetchScryfallApi::fetch_Cards_By_Name($request->name)->groupBy('oracle_id')->pluck(0);
