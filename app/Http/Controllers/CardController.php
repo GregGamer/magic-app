@@ -28,18 +28,6 @@ class CardController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('cards.create',[
-            'user' => auth()->user()
-        ]);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -48,7 +36,7 @@ class CardController extends Controller
     public function store(Request $request, Archive $archive, $card)
     {
         $rawCard = Card::store_Card_By_ScryfallId($card, $archive->id);
-        
+
         return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $rawCard->rawcard->oracle_id])->with('success', 'Card got STORED');
     }
 
@@ -64,17 +52,6 @@ class CardController extends Controller
             'card' => $card,
             'archive' => null
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Card  $card
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Card $card)
-    {
-        return view('cards.edit');
     }
 
     /**
@@ -156,9 +133,9 @@ class CardController extends Controller
 
    public function storeCardsFromAPI(Request $request){
        $cards = self::fetchCardsFromAPI($request);
-       
+
        foreach($cards as $card){
-           RawCardController::storeRawCard($card);
+           RawCardController::store_RawCard_By_RawCardObject($card);
            //dd(RawCard::where('scryfall_id', $card->id)->first());
        }
 
