@@ -39,7 +39,7 @@
                                         <a href="{{ route('archives.cards.show', ['archive' => $archive, 'scryfall_id' => $printing->scryfall_id])}}" class="text-sm text-gray-900">{{ $printing->printed_name ? $printing->printed_name : $printing->name }}</a>
                                     </div>
                                     <div class="text-sm text-gray-500">
-                                        {{$printing->lang}}
+                                        {{ $printing->lang }}
                                     </div>
                                 </div>
                             </td>
@@ -48,14 +48,14 @@
                                     <div class="flex-shrink-0 h-10 w-10">
                                         <img class="h-10 w-10"
                                              src="{{ $printing->edition()->icon_svg_uri }}"
-                                             alt="">
+                                             alt="{{ $printing->set_name }}">
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-medium text-gray-900">
-                                            {{$printing->set_name}}
+                                            {{ $printing->set_name }}
                                         </div>
                                         <div class="text-sm text-gray-500">
-                                            {{$printing->collector_number}} {{$printing->set}}
+                                            {{ $printing->collector_number }} {{ $printing->set }}
                                         </div>
                                     </div>
                                 </div>

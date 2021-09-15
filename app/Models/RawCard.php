@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Edition;
 use App\Models\Card;
 use App\Http\Controllers\RawCardController;
+use Error;
 
 class RawCard extends Model
 {
@@ -21,6 +22,12 @@ class RawCard extends Model
 
     public function edition()
     {
+        $edition = Edition::where('code', $this->set)->first();
+        if($edition == null) {
+            Edition::store_Edition_by_EditionObject(FetchScryfallApi::fetch_Edition_By_Set($this->set));
+        } else {
+            return $edition;
+        }
         return Edition::where('code', $this->set)->first();
     }
 
@@ -33,6 +40,7 @@ class RawCard extends Model
     }
 
     public function printings(){
+        $printings =  self::where('oracle_id', $this->oracle_id)->get()->sortByDesc('released_at');
         return self::where('oracle_id', $this->oracle_id)->get()->sortByDesc('released_at');
     }
 
@@ -43,7 +51,7 @@ class RawCard extends Model
 
     public static function update_CardPrintings_By_fetchedPrinting($fetched_printing){
         $printings = FetchScryfallApi::fetch_CardPrintings_By_OracleId($fetched_printing->oracle_id, $fetched_printing->lang);
-
+        $printings = $printings->merge(FetchScryfallApi::fetch_CardPrintings_By_OracleId($fetched_printing->oracle_id));
         foreach($printings as $printing) {
             if(! RawCard::where('scryfall_id', $printing->id)->exists()){
                 RawCardController::store_RawCard_By_RawCardObject($printing);
@@ -57,13 +65,12 @@ class RawCard extends Model
         return self::where('scryfall_id', $scryfall_id)->first();
     }
 
-    public static function render_text($card) {
-        $text = $card->printed_text ? $card->printed_text : $card->oracle_text;
-        $name = $card->printed_name ? $card->printed_name : $card->name;
+    public static function render_text($text, $name = null) {
 
         $text = '<p class="py-1">' . $text . '</p>';
-        $text = str_replace('\\n', '</p><p class="py-1">', $text);
-        $text = str_replace($name, '<span class="font-bold">'.$name.'</span>', $text);
+        $text = preg_replace('/\\n/', '</p><p class="py-1">', $text);
+        if($name)
+            $text = str_replace($name, '<span class="font-bold">'.$name.'</span>', $text);
         foreach(Symbology::all() as $symbol){
             $text = str_replace( $symbol->symbol, '<img class="h-5 inline-block mx-1" src="'. $symbol->svg_uri .'" alt="'. $symbol->english .'">', $text);
         }

@@ -1,7 +1,7 @@
 <div class="flex flex-row p-3 w-full">
     <div class="p-3 w-2/3">
         <div class="flex justify-between items-center bg-gray-200 p-3 rounded-lg">
-            <div class="text-gray-500 text-4xl">{{ $card_face->printed_name ? $card_face->printed_name : $card_face->name }}</div>
+            <div class="text-gray-500 text-4xl">{{ $card_face->name }}</div>
             <div class="flex flex-row justify-between items-center">
                 @foreach (App\Models\Symbology::mana_symbols($card_face->mana_cost) as $symbol)
                     <img class="mx-1 drop-shadow-lg w-7" src="{{$symbol->svg_uri}}" alt="{{$symbol->english}}">
@@ -9,23 +9,23 @@
             </div>
         </div>
         <div class="flex justify-between items-center border-2 p-2 mt-5 rounded-lg w-full">
-            <p>{{ $card_face->printed_type_line ? $card_face->printed_type_line : $card_face->type_line}}</p>
+            <p>{{ $card_face->type_line }}</p>
             <p>{{ $card->rarity }} <img class="inline-block h-7" src="{{ $card->edition()->icon_svg_uri}}" alt=""></p>
         </div>
         <div class="flex flex-row items-center py-2">
-                @foreach (json_decode($card->keywords) as $keyword)
-                    <div class="mx-2 text-sm inline-flex items-center font-bold leading-sm px-3 py-1 bg-red-200 text-red-700 rounded-full">
-                        {{ $keyword }}
-                    </div>
-                @endforeach
+            @foreach (json_decode($card->keywords) as $keyword)
+                <div class="mx-2 text-sm inline-flex items-center font-bold leading-sm px-3 py-1 bg-red-200 text-red-700 rounded-full">
+                    {{ $keyword }}
+                </div>
+            @endforeach
         </div>
         <div class="p-3 flex-grow">
             <div class="py-2">
-                <p>{!! App\Models\RawCard::render_text($card) !!}</p>
+                <p>{!! App\Models\RawCard::render_text( $card_face->oracle_text, $card_face->name) !!}</p>
             </div>
-            @if ($card->flavor_text)
+            @if (isset($card_face->flavor_text))
                 <div class="py-2 border-t-2">
-                    <p class="italic">{{ $card->flavor_text }}</p>
+                    <p>{{ preg_replace('/\\n/', '<br>', $card_face->flavor_text) }}</p>
                 </div>
             @endif
         </div>
