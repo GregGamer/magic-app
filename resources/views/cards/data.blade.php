@@ -23,7 +23,7 @@
                                 </div>
                              @endforeach
                         </div>
-                        <div class="p-3">
+                        <div class="p-3 flex-grow">
                             <div class="py-2">
                                 <p>{!! $card->render_text() !!}</p>
                             </div>

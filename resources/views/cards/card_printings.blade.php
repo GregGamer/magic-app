@@ -34,7 +34,14 @@
                                 <div class="text-sm text-gray-900">{{$loop->iteration}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('archives.cards.show', ['archive' => $archive, 'scryfall_id' => $printing->scryfall_id])}}" class="text-sm text-gray-900">{{ $printing->printed_name ? $printing->printed_name : $printing->name }}</a>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        <a href="{{ route('archives.cards.show', ['archive' => $archive, 'scryfall_id' => $printing->scryfall_id])}}" class="text-sm text-gray-900">{{ $printing->printed_name ? $printing->printed_name : $printing->name }}</a>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        {{$printing->lang}}
+                                    </div>
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
