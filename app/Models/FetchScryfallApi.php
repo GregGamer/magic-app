@@ -69,7 +69,7 @@ class FetchScryfallApi extends Model
     }
 
     public static function fetch_Edition_By_Set($set_code){
-        return collect(Http::get('http://api.scryfall.com/sets/'.$set_code)->object()->data);
+        return Http::get('http://api.scryfall.com/sets/'.$set_code)->object();
     }
 
     //////////////////////////////////////////////////////

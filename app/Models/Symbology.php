@@ -23,6 +23,10 @@ class Symbology extends Model
         'svg_uri',
     ];
 
+    public static function mana_symbols($symbol_string){
+        return self::get_Symbology_By_SymbolString($symbol_string);
+    }
+
     public static function get_Symbology_By_Symbol($symbol)
     {
         return self::where('symbol', $symbol)->first();
