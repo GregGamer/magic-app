@@ -24,95 +24,44 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 Route::get('cards/fetch', [CardController::class, 'storeCardsFromAPI']);
 Route::get('editions/fetch_sets', [EditionController::class, 'fetchSets']);
 Route::get('editions/update_sets', [EditionController::class, 'updateSets']);
 
 
-/******************************************************* 
+///////////////////////////////////
+// New Routes
+///////////////////////////////////
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+
+/*******************************************************
  *        Archive Routes
 ********************************************************/
-//Route::middleware(['auth:sanctum', 'verified'])->resource('archives', ArchiveController::class);
-Route::middleware(['auth:sanctum', 'verified'])->name('archives.')->group(function() {
-    Route::get('archives', [ArchiveController::class, 'index'])
-        ->name('index');
+    Route::resource('archives', ArchiveController::class)->scoped([
+        'archive' => 'slug',
+    ]);
 
-    Route::get('archives/create', [ArchiveController::class, 'create'])
-        ->name('create');
-        
-    Route::post('archives', [ArchiveController::class, 'store'])
-        ->name('store');
-        
-    Route::get('archives/{archive:slug}', [ArchiveController::class, 'show'])
-        ->missing(function(){ return redirect()->route('archives.index'); })
-        ->name('show');
-        
-    Route::get('archives/{archive:slug}/edit', [ArchiveController::class, 'edit'])
-        ->name('edit');
-        
-    Route::put('archives/{archive:slug}', [ArchiveController::class, 'update'])
-        ->name('update');
-
-    Route::delete('archives/{archive:slug}', [ArchiveController::class, 'delete'])
-        ->name('delete');
-});
-
-
-/******************************************************* 
+/*******************************************************
  *        Deck Routes
 ********************************************************/
-//Route::middleware(['auth:sanctum', 'verified'])->resource('decks', DeckController::class);
-Route::middleware(['auth:sanctum', 'verified'])->name('decks.')->group(function() {
-    Route::get('decks', [DeckController::class, 'index'])
-        ->name('index');
+    Route::resource('decks', DeckController::class)->scoped([
+        'deck' => 'slug',
+    ]);
 
-    Route::get('decks/create', [DeckController::class, 'create'])
-        ->name('create');
-
-    Route::post('decks', [DeckController::class, 'store'])
-        ->name('store');
-
-    Route::get('decks/{deck:slug}', [DeckController::class, 'show'])
-        ->name('show');
-
-    Route::get('decks/{deck:slug}/edit', [DeckController::class, 'edit'])
-        ->name('edit');
-
-    Route::put('decks/{deck:slug}', [DeckController::class, 'update'])
-        ->name('update');
-        
-    Route::delete('decks/{deck:slug}', [DeckController::class, 'delete'])
-        ->name('delete');
-});
-
-
-/******************************************************* 
- *        Archive Card Routes
+/*******************************************************
+ *        Single Card Routes
 ********************************************************/
-//Route::middleware(['auth:sanctum', 'verified'])->resource('archives.cards', ArchiveCardController::class);
-Route::middleware(['auth:sanctum', 'verified'])->name('archives.cards.')->group(function(){
-    Route::get('archives/{archive:slug}/cards', [ArchiveController::class, 'show'])
-        ->missing(function(){ return redirect()->route('archives.index'); })
-        ->name('index');
-        
-    Route::put('archives/{archive:slug}/cards/{card:scryfall_id}', [CardController::class, 'store'])
-        ->missing(function(){ return redirect()->route('archives.cards.index'); })
-        ->name('store');
-        
-    Route::get('archives/{archive:slug}/cards/{card:oracle_id}', [ArchiveCardController::class, 'show'])
-        ->missing(function(){ return redirect()->route('archives.cards.index'); })
-        ->name('show');
-        
-    Route::delete('archives/{archive:slug}/cards/{card:scryfall_id}', [CardController::class, 'destroy'])
-        ->missing(function(){ return redirect()->route('archives.cards.index'); })
-        ->name('delete');
+    Route::resource('cards', DeckController::class)
+        ->except(['create', 'edit', 'update']);
+
+
+/*******************************************************
+ *        Archive Cards Routes
+********************************************************/
+    Route::get('archives/{archive:slug}/cards/{scryfall_id}', [ArchiveCardController::class, 'show'])
+        ->middleware(['updateDB'])
+        ->name('archives.cards.show');
 });
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('cards', [CardController::class, 'index'])->name('cards.index');
-Route::middleware(['auth:sanctum', 'verified'])->get('cards/{card:oracle_id}', [CardController::class, 'show'])->name('cards.show')->whereUuid('card:oracle_id');
-

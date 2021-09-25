@@ -6,7 +6,6 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-console.log('test');
 $('#magic-search').select2({
   placeholder: "Search for cards",
   minimumInputLength: 4,
@@ -18,7 +17,7 @@ $('#magic-search').select2({
 
         var queryParameters = {
             term: params.term
-        }
+        };
         return queryParameters;
       },
       processResults: function (data) {
@@ -26,8 +25,8 @@ $('#magic-search').select2({
               results: $.map(data, function (item) {
                   return {
                       text: item.name,
-                      id: item.oracle_id
-                  }
+                      id: item.id
+                  };
               })
           };
       },
