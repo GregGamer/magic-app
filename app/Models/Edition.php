@@ -49,7 +49,7 @@ class Edition extends Model
 
     public static function update_Editions(){
         $fetched_data = FetchScryfallApi::fetch_Editions();
-        if($fetched_data->count() == self::all()->count()){
+        if($fetched_data->count() != self::all()->count()){
             self::delete_Editions();
             self::store_Editions_By_Editions($fetched_data);
         }

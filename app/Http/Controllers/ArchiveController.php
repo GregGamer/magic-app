@@ -48,7 +48,7 @@ class ArchiveController extends Controller
             'name' => ['required', 'unique:archives', 'max:255'],
             'collection_id' => ['required', 'exists:teams,id']
         ]);
-        
+
         $archive = new Archive();
         $archive->name = $request->name;
         $archive->slug = Str::slug($request->name);
@@ -59,7 +59,7 @@ class ArchiveController extends Controller
         $archive->maxCardsInSlot = $request->maxCardsInSlot;
         $archive->save();
 
-        return redirect(route('archives.index'))->with('success', 'Archive wurde erstellt');
+        return redirect(route('archives.index'))->with('success', 'Archive got created');
     }
 
     /**
@@ -70,8 +70,8 @@ class ArchiveController extends Controller
      */
     public function show(Request $request, Archive $archive)
     {
-        if ($request->has('oracle_id')) {
-            return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'card' => $request->oracle_id]);
+        if ($request->has('scryfall_id')) {
+            return redirect()->route('archives.cards.show', ['archive' => $archive->slug, 'scryfall_id' => $request->scryfall_id]);
         }
         return view('archives.show', [
             'archive' => $archive,
@@ -91,7 +91,7 @@ class ArchiveController extends Controller
      */
     public function edit(Archive $archive)
     {
-        //
+        return view('archives.edit', ['archive' => $archive]);
     }
 
     /**
@@ -103,7 +103,21 @@ class ArchiveController extends Controller
      */
     public function update(Request $request, Archive $archive)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'unique:archives', 'max:255'],
+            'collection_id' => ['required', 'exists:teams,id']
+        ]);
+
+        $archive->name = $request->name;
+        $archive->slug = Str::slug($request->name);
+        $archive->short_description = $request->short_description;
+        $archive->description = $request->description;
+        $archive->collection_id = $request->collection_id;
+        $archive->isFolder = $request->isFolder == true;
+        $archive->maxCardsInSlot = $request->maxCardsInSlot;
+        $archive->save();
+
+        return redirect()->route('archives.edit')->with('success', 'Archive got updated');
     }
 
     /**
@@ -114,6 +128,8 @@ class ArchiveController extends Controller
      */
     public function destroy(Archive $archive)
     {
-        //
+        $archive->delete();
+
+        return redirect()->route('archives.index')->with('success', 'Archive got deleted');
     }
 }

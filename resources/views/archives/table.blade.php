@@ -46,7 +46,7 @@
                                 <div class="text-sm text-gray-900">{{\Illuminate\Support\Facades\DB::table('cards')->where('archive_id', $archive->id)->count()}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="{{route('archives.cards.index', ['archive' => $archive->slug])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                <a href="{{route('archives.show', ['archive' => $archive->slug])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                         </tr>
                     @endforeach

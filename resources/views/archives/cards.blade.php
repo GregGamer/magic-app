@@ -53,7 +53,7 @@
                                 <div class="text-sm text-gray-900">{{count($card)}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a href="{{route('archives.cards.show', ['archive' => $archive->slug, 'card'=>$card->first()->rawcard->oracle_id])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                <a href="{{route('archives.cards.show', ['archive' => $archive->slug, 'scryfall_id'=>$card->first()->rawcard->scryfall_id])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                         </tr>
                     @endforeach
