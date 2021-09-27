@@ -15,9 +15,13 @@ class ScryfallCard extends Scryfall
        $this->raw = $this->raw();
     }
 
+    public static function find(String $uuid)
+    {
+        return Http::get(self::$API_URL . '/cards/' . $uuid)->object();
+    }
+
     public function raw()
     {
-        echo 'http request got sent';
         return Http::get(self::$API_URL . '/cards/' . $this->uuid)->object();
     }
 
