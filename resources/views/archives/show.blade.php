@@ -7,7 +7,7 @@
 
         </div>
     </x-slot>
-    
+
     @include('archives.search')
 
     <div class="py-12">
@@ -18,5 +18,4 @@
         </div>
     </div>
 
-    <script src="/js/search_cards.js"></script>
 </x-app-layout>
