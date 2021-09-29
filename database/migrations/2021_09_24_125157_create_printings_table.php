@@ -15,6 +15,85 @@ class CreatePrintingsTable extends Migration
     {
         Schema::create('printings', function (Blueprint $table) {
             $table->id();
+
+            //Core Card Fields
+            //$table->uuid('arena_id')->nullable();
+            $table->uuid('scryfall_id')->unique();        //this is in the api the 'id' it is the only field, that has a different name
+            $table->string('lang');
+            //$table->integer('mtgo_id')->nullable();
+            //$table->integer('mtgo_foil_id')->nullable();
+            //$table->json('multiverse_ids')->nullable();
+            //$table->integer('tcgplayer_id')->nullable();
+            //$table->integer('cardmarket_id')->nullable();
+            //$table->string('object');
+            $table->uuid('oracle_id');
+            $table->string('prints_search_uri');
+            $table->string('rulings_uri');
+            $table->string('scryfall_uri');
+            $table->string('uri');
+
+            //Gameplay Fields
+            $table->json('all_parts')->nullable();
+            $table->json('card_faces')->nullable();
+            $table->decimal('cmc');
+            $table->json('color_identity');       // color_identity -> Array but is saved as json
+            $table->integer('edhrec_rank')->nullable();
+            $table->boolean('foil');
+            $table->string('hand_modifier')->nullable();               // for Vanguard cards
+            $table->json('keywords');               // Keywords -> Array but is saved as json
+            $table->string('layout');               // Layouts: normal, split, flip, transform, ...
+            $table->json('legalities');
+            $table->string('life_modifier')->nullable();               // for Vanguard cards
+            $table->string('name');
+            $table->boolean('nonfoil');
+            $table->boolean('oversized');
+            $table->json('produced_mana')->nullable();
+            $table->boolean('reserved');
+
+            //Print Fields
+            $table->boolean('booster');
+            $table->string('border_color');
+            $table->uuid('card_back_id');
+            $table->string('collector_number');
+            //$table->boolean('content_warning')->nullable();
+            $table->boolean('digital');
+            $table->string('flavor_name')->nullable();
+            $table->text('flavor_text')->nullable();
+            $table->json('frame_effects')->nullable();
+            $table->string('frame');
+            $table->boolean('full_art')->nullable();
+            $table->json('games');
+            $table->boolean('highres_image');
+            $table->uuid('illustration_id')->nullable();
+            $table->string('image_status');
+            $table->json('image_uris')->nullable();
+            $table->json('prices');
+            $table->string('printed_name')->nullable();
+            $table->text('printed_text')->nullable();
+            $table->string('printed_type_line')->nullable();
+            $table->boolean('promo');
+            $table->json('promo_types')->nullable();
+            $table->json('purchase_uris');
+            $table->string('rarity');
+            $table->json('related_uris');
+            $table->date('released_at');
+            $table->boolean('reprint');
+            $table->string('scryfall_set_uri');
+            $table->string('set_name');
+            $table->string('set_search_uri');
+            $table->string('set_type');
+            $table->string('set_uri');
+            $table->string('set');
+            $table->string('set_id');
+            $table->boolean('story_spotlight');
+            $table->boolean('textless');
+            $table->boolean('variation');
+            //$table->date('preview.previewed_at')->nullable();
+            //$table->string('preview.source_uri')->nullable();
+            //$table->string('preview.source')->nullable();
+
+            //Foreign Objects
+
             $table->timestamps();
         });
     }

@@ -1532,6 +1532,9 @@ select {
 .border-b {
 	border-bottom-width: 1px;
 }
+.border-r {
+	border-right-width: 1px;
+}
 .border-t-2 {
 	border-top-width: 2px;
 }
@@ -1553,6 +1556,10 @@ select {
 .border-gray-100 {
 	--tw-border-opacity: 1;
 	border-color: rgba(243, 244, 246, var(--tw-border-opacity));
+}
+.border-gray-400 {
+	--tw-border-opacity: 1;
+	border-color: rgba(156, 163, 175, var(--tw-border-opacity));
 }
 .bg-white {
 	--tw-bg-opacity: 1;
@@ -1783,9 +1790,6 @@ select {
 }
 .uppercase {
 	text-transform: uppercase;
-}
-.italic {
-	font-style: italic;
 }
 .leading-5 {
 	line-height: 1.25rem;
