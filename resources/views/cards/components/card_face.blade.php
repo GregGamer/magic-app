@@ -25,7 +25,7 @@
             </div>
             @if (isset($card_face->flavor_text))
                 <div class="py-2 border-t-2">
-                    <p>{{ preg_replace('/\\n/', '<br>', $card_face->flavor_text) }}</p>
+                    <p>{!! preg_replace('/\\n/', '<br>', $card_face->flavor_text) !!}</p>
                 </div>
             @endif
         </div>
