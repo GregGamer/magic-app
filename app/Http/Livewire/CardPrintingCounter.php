@@ -14,19 +14,19 @@ class CardPrintingCounter extends Component
 
     public function mount()
     {
-        $this->helper_counter = $this->printing->cards->count();
+        $this->helper_counter = $this->printing->cards->where('archive_id', $this->archive->id)->count();
     }
 
     public function addOne()
     {
         Card::store_Card_By_CardPrinting_And_Archive($this->printing, $this->archive);
-        $this->helper_counter = $this->printing->cards->count()+1;
+        $this->helper_counter = $this->printing->cards->where('archive_id', $this->archive->id)->count()+1;
     }
 
     public function subOne()
     {
         Card::delete_Card_By_CardPrinting_And_Archive( $this->printing, $this->archive);
-        $this->helper_counter = $this->printing->cards->count()-1;
+        $this->helper_counter = $this->printing->cards->where('archive_id', $this->archive->id)->count()-1;
     }
 
     public function render()
