@@ -75,12 +75,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## TODO
 
-- Fixing the search
+x Fixing the search
 - Making a Filter for the search
-- Adding CRUD Functionality to the Archive Models
+x Adding CRUD Functionality to the Archive Models
 - Rewriting the RawCard Model to Printing and Edition and CardFace and Ruling
-- Collection soll jeder einsehen können
+x Collection soll jeder einsehen können
 - Downloading Bulk Cards and Inserting into the Database
 - Next and previous button auf der single card page. Die Buttons sollen auf die jeweils nächste Kartennummer verweisen. also 42 cmr soll next auf 43 cmr und prev auf 41 cmr.
-
+- Lazy Loading the Symbologies
 
