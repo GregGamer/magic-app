@@ -15,6 +15,12 @@ class Archive extends Model
         'description',
         'collection_id',
         'isFolder',
+        'public',
         'maxCardsInSlot'
     ];
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }

@@ -43,7 +43,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 {{-- TODO make a fix for that ugly code the line below --}}
-                                <div class="text-sm text-gray-900">{{\Illuminate\Support\Facades\DB::table('cards')->where('archive_id', $archive->id)->count()}}</div>
+                                <div class="text-sm text-gray-900">{{ $archive->cards->count() }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="{{route('archives.show', ['archive' => $archive->slug])}}" class="text-indigo-600 hover:text-indigo-900">Show</a>
