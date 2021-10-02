@@ -45,8 +45,19 @@
                                     Folder? </label>
                                 <select id="isFolder" name="isFolder" autocomplete="{{old('isFolder')}}"
                                         class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <option selected>No</option>
-                                    <option>Yes</option>
+                                    <option selected value="false">No</option>
+                                    <option value="true">Yes</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-span-6 sm:col-span-3">
+                                <label for="public" class="block text-sm font-medium text-gray-700">
+                                    Should this be a public Archive? 
+                                </label>
+                                <select id="public" name="public" autocomplete="{{old('public')}}"
+                                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option selected value="false">No</option>
+                                    <option value="true">Yes</option>
                                 </select>
                             </div>
                         </div>

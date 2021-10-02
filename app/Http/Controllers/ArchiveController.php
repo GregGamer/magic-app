@@ -21,6 +21,9 @@ class ArchiveController extends Controller
             'archives' => Archive::all()
                 ->where('collection_id', auth()->user()->currentTeam->id)
                 ->sortByDesc('created_at'),
+            'public_archives' => Archive::all()
+                ->where( 'public', '=', 1)
+                ->sortByDesc('created_at'),
         ]);
     }
 
@@ -55,7 +58,8 @@ class ArchiveController extends Controller
         $archive->short_description = $request->short_description;
         $archive->description = $request->description;
         $archive->collection_id = $request->collection_id;
-        $archive->isFolder = $request->isFolder == true;
+        $archive->isFolder = $request->isFolder == 'true';
+        $archive->public = $request->public == 'true';
         $archive->maxCardsInSlot = $request->maxCardsInSlot;
         $archive->save();
 
