@@ -18,11 +18,10 @@ class ArchiveController extends Controller
     public function index()
     {
         return view('archives.index', [
-            'archives' => Archive::all()
-                ->where('collection_id', auth()->user()->currentTeam->id)
-                ->sortByDesc('created_at'),
-            'public_archives' => Archive::all()
-                ->where( 'public', '=', 1)
+            'archives' => Archive::where('collection_id', auth()->user()->currentTeam->id)
+                ->with('cards')
+                ->get()->sortByDesc('created_at'),
+            'public_archives' => Archive::where('public', 1)->with('cards')->get()
                 ->sortByDesc('created_at'),
         ]);
     }
@@ -95,7 +94,7 @@ class ArchiveController extends Controller
      */
     public function edit(Archive $archive)
     {
-        return view('archives.edit', ['archive' => $archive]);
+        return view('archives.edit', ['archive' => $archive, 'user' => auth()->user()]);
     }
 
     /**
@@ -108,7 +107,7 @@ class ArchiveController extends Controller
     public function update(Request $request, Archive $archive)
     {
         $request->validate([
-            'name' => ['required', 'unique:archives', 'max:255'],
+            'name' => ['required', 'max:255'],
             'collection_id' => ['required', 'exists:teams,id']
         ]);
 
@@ -117,11 +116,12 @@ class ArchiveController extends Controller
         $archive->short_description = $request->short_description;
         $archive->description = $request->description;
         $archive->collection_id = $request->collection_id;
-        $archive->isFolder = $request->isFolder == true;
+        $archive->isFolder = $request->isFolder == 'true';
+        $archive->public = $request->public == 'true';
         $archive->maxCardsInSlot = $request->maxCardsInSlot;
         $archive->save();
 
-        return redirect()->route('archives.edit')->with('success', 'Archive got updated');
+        return redirect()->route('archives.show', [$archive])->with('success', 'Archive got updated');
     }
 
     /**
