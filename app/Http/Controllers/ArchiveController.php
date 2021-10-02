@@ -18,11 +18,10 @@ class ArchiveController extends Controller
     public function index()
     {
         return view('archives.index', [
-            'archives' => Archive::all()
-                ->where('collection_id', auth()->user()->currentTeam->id)
-                ->sortByDesc('created_at'),
-            'public_archives' => Archive::all()
-                ->where( 'public', '=', 1)
+            'archives' => Archive::where('collection_id', auth()->user()->currentTeam->id)
+                ->with('cards')
+                ->get()->sortByDesc('created_at'),
+            'public_archives' => Archive::where('public', 1)->with('cards')->get()
                 ->sortByDesc('created_at'),
         ]);
     }
