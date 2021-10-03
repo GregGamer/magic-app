@@ -5,3 +5,39 @@
 #magic-search {
     width: 400px;
 }
+
+.bg-theme--red {
+    background-image: url("/img/red-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+
+.bg-theme--blue {
+    background-image: url("/img/blue-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+
+.bg-theme--green {
+    background-image: url("/img/green-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+
+.bg-theme--white {
+    background-image: url("/img/white-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+    background-position-x: center;
+}
+
+.bg-theme--black {
+    background-image: url("/img/black-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
