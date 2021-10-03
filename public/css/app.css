@@ -1264,17 +1264,14 @@ select {
 .h-20 {
 	height: 5rem;
 }
+.h-72 {
+	height: 18rem;
+}
 .h-7 {
 	height: 1.75rem;
 }
 .h-full {
 	height: 100%;
-}
-.h-36 {
-	height: 9rem;
-}
-.h-72 {
-	height: 18rem;
 }
 .min-h-screen {
 	min-height: 100vh;
@@ -1321,14 +1318,14 @@ select {
 .w-20 {
 	width: 5rem;
 }
+.w-1\/3 {
+	width: 33.333333%;
+}
 .w-2\/3 {
 	width: 66.666667%;
 }
 .w-7 {
 	width: 1.75rem;
-}
-.w-1\/3 {
-	width: 33.333333%;
 }
 .w-max {
 	width: -webkit-max-content;
@@ -1626,8 +1623,23 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
 }
+.bg-yellow-100 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(254, 243, 199, var(--tw-bg-opacity));
+}
+.bg-yellow-200 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(253, 230, 138, var(--tw-bg-opacity));
+}
+.bg-yellow-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(255, 251, 235, var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
+}
+.bg-opacity-70 {
+	--tw-bg-opacity: 0.7;
 }
 .object-cover {
 	-o-object-fit: cover;
@@ -1642,11 +1654,11 @@ select {
 .p-3 {
 	padding: 0.75rem;
 }
-.p-4 {
-	padding: 1rem;
-}
 .p-5 {
 	padding: 1.25rem;
+}
+.p-4 {
+	padding: 1rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1802,6 +1814,9 @@ select {
 }
 .uppercase {
 	text-transform: uppercase;
+}
+.italic {
+	font-style: italic;
 }
 .leading-5 {
 	line-height: 1.25rem;
@@ -1993,6 +2008,37 @@ select {
 }
 #magic-search {
     width: 400px;
+}
+.bg-theme--red {
+    background-image: url("/img/red-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+.bg-theme--blue {
+    background-image: url("/img/blue-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+.bg-theme--green {
+    background-image: url("/img/green-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+.bg-theme--white {
+    background-image: url("/img/white-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+    background-position-x: center;
+}
+.bg-theme--black {
+    background-image: url("/img/black-theme.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
 }
 .hover\:border-gray-300:hover {
 	--tw-border-opacity: 1;
