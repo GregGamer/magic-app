@@ -78,6 +78,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 x Fixing the search
 - Making a Filter for the search
 x Adding CRUD Functionality to the Archive Models
+- Adding a Modal to the Delete Button of the Archive Show Page
 - Rewriting the RawCard Model to Printing and Edition and CardFace and Ruling
 x Collection soll jeder einsehen können
 - Downloading Bulk Cards and Inserting into the Database
