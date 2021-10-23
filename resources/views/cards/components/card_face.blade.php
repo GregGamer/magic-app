@@ -31,7 +31,23 @@
         </div>
         <div class="flex flex-row justify-between items-center border-t-2 p-4">
             <div class="flex flex-col">
-                <div>{{ $card->collector_number }}/{{ $card->edition()->card_count }}</div>
+                <div class="flex flex-row">
+                    <div class="mx-2">
+                        <a href="{{route('archives.cards.show', ['archive' => $archive, 'scryfall_id' => $card->prevCollNum()->id])}}">
+                            <span class="material-icons">
+                                chevron_left
+                            </span>
+                        </a>
+                    </div>
+                    <div class="mx-2">{{ $card->collector_number }}</div>
+                    <div class="mx-2">
+                        <a href="{{route('archives.cards.show', ['archive' => $archive, 'scryfall_id' => $card->nextCollNum()->id])}}">
+                            <span class="material-icons">
+                                chevron_right
+                            </span>
+                        </a>
+                    </div>
+                </div>
                 <div>
                     <span class="uppercase">{{ $card->edition()->parent_set_code ? $card->edition()->parent_set_code : $card->edition()->code }}</span>
                         +
