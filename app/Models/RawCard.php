@@ -89,4 +89,21 @@ class RawCard extends Model
         $CardById = Http::get('https://api.scryfall.com/cards/' . $card_uuid)->object();
         return $CardById;
     }
+
+    /////////////////////////////////////////
+
+    public function prevCollNum()
+    {
+        $prevCollNumber = ($this->collector_number > 1) ? $this->collector_number - 1 : 1;
+        return Http::get('https://api.scryfall.com/cards/' . $this->set . '/' . $prevCollNumber)->object();
+    }
+
+    public function nextCollNum()
+    {
+        $response = Http::get('https://api.scryfall.com/cards/' . $this->set . '/' . $this->collector_number + 1)->object();
+        if ( $response->object == "error")
+            return Http::get('https://api.scryfall.com/cards/' . $this->set . '/' . $this->collector_number)->object();
+
+        return $response;
+    }
 }
